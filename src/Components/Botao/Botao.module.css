@@ -1,0 +1,38 @@
+.Azul {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background-color: #5aabdd;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.Azul:hover {
+    background-color: #4a9bcd;
+}
+
+
+/* Botão secundário - "Voltar ao Login" */
+.Branco {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background-color: #ffffff;
+    color: #5aabdd;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    border: 1.5px solid #c8e4f5;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.Branco:hover {
+    background-color: #f0f8fd;
+    border-color: #5aabdd;
+}

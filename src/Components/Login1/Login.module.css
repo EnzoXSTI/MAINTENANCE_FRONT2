@@ -1,0 +1,110 @@
+.pagina {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ── TOAST ── */
+.toast {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 0.8rem auto;
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    animation: slideDown 0.3s ease;
+}
+
+.toastErro {
+    background-color: #fff2f2;
+    border: 1px solid #f5c6c6;
+    color: #c0392b;
+}
+
+.toastSucesso {
+    background-color: #f0faf4;
+    border: 1px solid #b2dfcc;
+    color: #1e7e44;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/* ── RESTANTE ── */
+.secao {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.conteudo {
+    width: 100%;
+    max-width: 420px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.logoImg {
+    height: 7rem;
+    width: auto;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #5aabdd;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.linkEsqueci {
+    display: block;
+    text-align: left;
+    margin-top: 0.4rem;
+    color: #999;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.areaBotao {
+    margin-bottom: 1rem;
+}
+
+.footerLogin {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.linkCadastro {
+    color: #5aabdd;
+    font-weight: 700;
+    text-decoration: none;
+}

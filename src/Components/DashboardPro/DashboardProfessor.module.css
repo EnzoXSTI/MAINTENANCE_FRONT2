@@ -1,0 +1,92 @@
+.pagina {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── TOAST ── */
+.toast {
+    width: 100%;
+    margin: 0 auto 0.8rem auto;
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    animation: slideDown 0.3s ease;
+}
+
+.toastErro {
+    background-color: #fff2f2;
+    border: 1px solid #f5c6c6;
+    color: #c0392b;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MAIN ── */
+.secao {
+    flex: 1;
+    padding: 2rem 2rem 0;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* ── BARRA DE SAUDAÇÃO ── */
+.barra {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.saudacao {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #222;
+    margin: 0;
+}
+
+.nome {
+    font-weight: 800;
+    color: #5aabdd;
+}
+
+/* ── BOTÕES ── */
+.botoes {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.btnAzul,
+.btnAzulClaro {
+    padding: 0.45rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btnAzul {
+    background-color: #5aabdd;
+    color: #ffffff;
+}
+
+.btnAzulClaro {
+    background-color: #a8d4ee;
+    color: #ffffff;
+}
+
+.btnAzul:hover,
+.btnAzulClaro:hover {
+    opacity: 0.85;
+}

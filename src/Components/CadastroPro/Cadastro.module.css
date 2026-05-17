@@ -1,0 +1,92 @@
+.pagina {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.toast {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 0.8rem auto;
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.toastErro {
+    background-color: #dc5252;
+    border: 1px solid #dc5252;
+    color: #fff;
+}
+
+.toastSucesso {
+    background-color: #56e84f;
+    border: 1px solid #56e84f;
+    color: #ffffff;
+}
+
+.secao {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.conteudoFormulario {
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.logoImg {
+    height: 7rem;
+    width: auto;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #5aabdd;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
+}
+
+.areaBotao {
+    margin-bottom: 1rem;
+}
+
+.footerCadastro {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.linkLogin {
+    color: #5aabdd;
+    font-weight: 700;
+    text-decoration: none;
+}
