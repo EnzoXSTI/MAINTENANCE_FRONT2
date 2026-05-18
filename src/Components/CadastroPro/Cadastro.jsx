@@ -41,7 +41,7 @@ export default function Cadastro() {
         if (foto) formData.append('foto_perfil', foto);
 
         try {
-            const resposta = await fetch('http://192.168.1.114:5000/criar_usuarios', {
+            const resposta = await fetch('http://10.92.3.117:5000/criar_usuarios', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
@@ -58,29 +58,18 @@ export default function Cadastro() {
             }
 
         } catch (e) {
-            setErro('Não foi possível conectar com o servidor.');
+            setErro('Não foi possível conectar com o servidor');
         }
     }
 
     return (
         <div className={css.pagina}>
 
-            <Header />
-
             <main className={css.secao}>
+                <div className={css.conteudoFormulario}>
 
-
-            {erro && (
-                <div className={`${css.toast} ${css.toastErro}`}>
-                    <span>{erro}</span>
-                </div>
-            )}
-            {mensagem && (
-                <div className={`${css.toast} ${css.toastSucesso}`}>
-                    <span>{mensagem}</span>
-                </div>
-            )}
-<div className={css.conteudoFormulario}>
+                    {erro && <p className={css.erro}>{erro}</p>}
+                    {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
                     <div className={css.logo}>
                         <img src="/logo2.png" alt="Logo" className={css.logoImg} />
@@ -109,7 +98,7 @@ export default function Cadastro() {
                         <Botao cor="Azul" texto="Cadastrar-se" acao={cadastrar} />
                     </div>
 
-                    <div className={css.footerCadastro}>
+                    <div className={css.pergunta}>
                         <span>Já tem uma conta? </span>
                         <Link to="/" className={css.linkLogin}>Login</Link>
                     </div>
@@ -117,7 +106,6 @@ export default function Cadastro() {
                 </div>
             </main>
 
-            <Footer />
         </div>
     );
 }

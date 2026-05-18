@@ -4,42 +4,6 @@
     min-height: 100vh;
 }
 
-/* ── TOAST ── */
-.toast {
-    position: fixed;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 420px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.7rem 1.2rem;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    animation: slideDown 0.3s ease;
-    z-index: 999;
-}
-
-.toastErro {
-    background-color: #fff2f2;
-    border: 1px solid #f5c6c6;
-    color: #c0392b;
-}
-
-.toastSucesso {
-    background-color: #f0faf4;
-    border: 1px solid #b2dfcc;
-    color: #1e7e44;
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-
-/* ── SEÇÃO ── */
 .secao {
     flex: 1;
     display: flex;
@@ -52,11 +16,27 @@
     background-repeat: no-repeat;
 }
 
-/* ── CONTEÚDO ── */
 .conteudoFormulario {
     width: 100%;
     max-width: 420px;
     padding: 0 1rem;
+}
+
+/* ── MENSAGENS ── */
+.erro {
+    background-color: #d10000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.sucesso {
+    background: #008a2e;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
 }
 
 .logo {
@@ -88,9 +68,9 @@
     margin-bottom: 1rem;
 }
 
-.footerCadastro {
-    text-align: center;
-    font-size: 0.9rem;
+.pergunta {
+    text-align: start;
+    font-size: 1.2rem;
     color: #333;
     margin-bottom: 1rem;
 }
@@ -101,13 +81,12 @@
     text-decoration: none;
 }
 
-/* ── RESPONSIVO ── */
 @media (max-width: 480px) {
     .secao {
         background-image: none;
     }
 
     .conteudoFormulario {
-        padding: 0 0.5rem;
+        padding: 1rem;
     }
 }

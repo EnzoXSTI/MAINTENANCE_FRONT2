@@ -17,10 +17,7 @@ export default function VerificacaoCodigo() {
 
     useEffect(() => {
         if (!erro && !mensagem) return;
-        const timer = setTimeout(() => {
-            setErro('');
-            setMensagem('');
-        }, 8000);
+        const timer = setTimeout(() => { setErro(''); setMensagem(''); }, 8000);
         return () => clearTimeout(timer);
     }, [erro, mensagem]);
 
@@ -42,8 +39,8 @@ export default function VerificacaoCodigo() {
 
         try {
             const rota = fluxo === 'cadastro'
-                ? 'http://192.168.1.114:5000/confirmar_email'
-                : 'http://192.168.1.114:5000/verificar_codigo';
+                ? 'http://10.92.3.117:5000/confirmar_email'
+                : 'http://10.92.3.117:5000/verificar_codigo';
 
             const resposta = await fetch(rota, { method: 'POST', body: formData });
             const dados = await resposta.json();
@@ -64,32 +61,23 @@ export default function VerificacaoCodigo() {
             } else {
                 setErro(dados.error || "Código inválido ou expirado.");
             }
-        } catch (error) {
+        } catch {
             setErro("Erro de conexão com o servidor.");
         }
     }
 
     return (
         <div className={css.pagina}>
-
-            <Header />
             <main className={css.secao}>
+                <div className={css.conteudo}>
 
+                    {erro && <p className={css.erro}>{erro}</p>}
+                    {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
-            {erro && (
-                <div className={`${css.toast} ${css.toastErro}`}>
-                    <span>{erro}</span>
-                </div>
-            )}
-            {mensagem && (
-                <div className={`${css.toast} ${css.toastSucesso}`}>
-                    <span>{mensagem}</span>
-                </div>
-            )}
-<div className={css.conteudo}>
                     <div className={css.logo}>
                         <img src="/logo2.png" alt="Logo" className={css.logoImg} />
                     </div>
+
                     <h2 className={css.titulo}>Verificação de código</h2>
                     <p className={css.descricao}>
                         {fluxo === 'cadastro'
@@ -97,21 +85,20 @@ export default function VerificacaoCodigo() {
                             : 'Enviamos um código de 6 dígitos para recuperar sua senha.'}
                         {' '}Digite abaixo para continuar.
                     </p>
+
                     <div className={css.campos}>
-                        <Input
-                            type="text"
-                            input={codigo}
+                        <Input type="text" input={codigo}
                             alterarInput={(e) => setCodigo(e.target.value)}
-                            placeholder="Ex: 123456"
-                        />
+                            placeholder="Ex: 123456" />
                     </div>
+
                     <div className={css.botoes}>
                         <Botao cor="Azul" texto="Verificar código" acao={verificarCodigo} />
                         <Botao cor="Branco" texto="Mudar E-mail" pagina="/enviarcodigo" />
                     </div>
+
                 </div>
             </main>
-            <Footer />
         </div>
     );
 }

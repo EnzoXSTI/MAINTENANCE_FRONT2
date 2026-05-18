@@ -14,13 +14,9 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    // Some automaticamente após 8 segundos
     useEffect(() => {
         if (!erro && !mensagem) return;
-        const timer = setTimeout(() => {
-            setErro('');
-            setMensagem('');
-        }, 8000);
+        const timer = setTimeout(() => { setErro(''); setMensagem(''); }, 8000);
         return () => clearTimeout(timer);
     }, [erro, mensagem]);
 
@@ -33,7 +29,7 @@ export default function Login() {
         formData.append('senha', senha);
 
         try {
-            const resposta = await fetch('http://192.168.1.114:5000/login', {
+            const resposta = await fetch('http://10.92.3.117:5000/login', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
@@ -44,36 +40,28 @@ export default function Login() {
             if (resposta.ok) {
                 localStorage.setItem('id_usuario', dados.usuario.id);
                 localStorage.setItem('token', dados.token);
-                navigate('/DashboardProfessor');
+                localStorage.setItem('tipo_usuario', dados.usuario.tipo); // ← adicionar isso
+
+                if (dados.usuario.tipo === 0) {
+                    navigate('/DashboardAdm');
+                } else {
+                    navigate('/DashboardProfessor');
+                }
             } else {
                 setErro(dados.error || "Erro ao efetuar login.");
             }
-        } catch (error) {
+        } catch {
             setErro("Erro de conexão com o servidor.");
         }
     }
 
     return (
         <div className={css.pagina}>
-
-            {/* Toast no topo */}
-            {erro && (
-                <div className={`${css.toast} ${css.toastErro}`}>
-                    <span>{erro}</span>
-                    <button className={css.toastFechar} onClick={() => setErro('')}>✕</button>
-                </div>
-            )}
-            {mensagem && (
-                <div className={`${css.toast} ${css.toastSucesso}`}>
-                    <span>{mensagem}</span>
-                    <button className={css.toastFechar} onClick={() => setMensagem('')}>✕</button>
-                </div>
-            )}
-
-            <Header />
-
             <main className={css.secao}>
                 <div className={css.conteudo}>
+
+                    {erro && <p className={css.erro}>{erro}</p>}
+                    {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
                     <div className={css.logo}>
                         <img src="/logo2.png" alt="Logo" className={css.logoImg} />
@@ -82,21 +70,13 @@ export default function Login() {
                     <p className={css.subtitulo}>faça seu login</p>
 
                     <div className={css.campos}>
-                        <Input
-                            label="E-mail"
-                            type="email"
-                            input={email}
+                        <Input label="E-mail" type="email" input={email}
                             alterarInput={(e) => setEmail(e.target.value)}
-                            placeholder="Ex: usuario@gmail.com"
-                        />
+                            placeholder="Ex: usuario@gmail.com" />
                         <div>
-                            <Input
-                                label="Senha"
-                                type="password"
-                                input={senha}
+                            <Input label="Senha" type="password" input={senha}
                                 alterarInput={(e) => setSenha(e.target.value)}
-                                placeholder="Ex: Senha@123"
-                            />
+                                placeholder="Ex: Senha@123" />
                             <Link to="/enviarcodigo" className={css.linkEsqueci}>Esqueci minha senha</Link>
                         </div>
                     </div>
@@ -112,8 +92,6 @@ export default function Login() {
 
                 </div>
             </main>
-
-            <Footer />
         </div>
     );
 }

@@ -15,10 +15,7 @@ export default function EnviarCodigo() {
 
     useEffect(() => {
         if (!erro && !mensagem) return;
-        const timer = setTimeout(() => {
-            setErro('');
-            setMensagem('');
-        }, 8000);
+        const timer = setTimeout(() => { setErro(''); setMensagem(''); }, 8000);
         return () => clearTimeout(timer);
     }, [erro, mensagem]);
 
@@ -31,7 +28,7 @@ export default function EnviarCodigo() {
         formData.append('email', email);
 
         try {
-            const resposta = await fetch('http://192.168.1.114:5000/esqueci_senha', {
+            const resposta = await fetch('http://10.92.3.117:5000/esqueci_senha', {
                 method: 'POST',
                 body: formData
             });
@@ -46,7 +43,7 @@ export default function EnviarCodigo() {
                 setMensagem('');
                 setErro(dados.error || "Erro ao enviar código.");
             }
-        } catch (error) {
+        } catch {
             setMensagem('');
             setErro("Erro de conexão com o servidor.");
         }
@@ -54,39 +51,23 @@ export default function EnviarCodigo() {
 
     return (
         <div className={css.pagina}>
-
-            <Header />
-
             <main className={css.secao}>
+                <div className={css.conteudo}>
 
-
-            {erro && (
-                <div className={`${css.toast} ${css.toastErro}`}>
-                    <span>{erro}</span>
-                </div>
-            )}
-            {mensagem && (
-                <div className={`${css.toast} ${css.toastSucesso}`}>
-                    <span>{mensagem}</span>
-                </div>
-            )}
-<div className={css.conteudo}>
+                    {erro && <p className={css.erro}>{erro}</p>}
+                    {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
                     <div className={css.logo}>
-                        <img src="/logo2.png" alt="Logo" className={css.logoImg} />
-                        <span className={css.logoTexto}>MAINTENANCE</span>
+                        <img src="/logo2.png" alt="Logo"  />
                     </div>
 
                     <h2 className={css.titulo}>Enviar código para e-mail</h2>
                     <p className={css.descricao}>Informe o e-mail cadastrado para receber o código de recuperação.</p>
 
                     <div className={css.campos}>
-                        <Input
-                            type="email"
-                            input={email}
+                        <Input type="email" input={email}
                             alterarInput={(e) => setEmail(e.target.value)}
-                            placeholder="Ex: usuario@gmail.com"
-                        />
+                            placeholder="Ex: usuario@gmail.com" />
                     </div>
 
                     <div className={css.botoes}>
@@ -96,8 +77,6 @@ export default function EnviarCodigo() {
 
                 </div>
             </main>
-
-            <Footer />
         </div>
     );
 }

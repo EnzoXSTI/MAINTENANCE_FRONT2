@@ -2,41 +2,29 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
-/* ── TOAST ── */
-.toast {
-    width: 100%;
-    margin: 0 auto 0.8rem auto;
-    display: flex;
-    align-items: center;
-    padding: 0.7rem 1.2rem;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    font-weight: 500;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    animation: slideDown 0.3s ease;
-}
-
-.toastErro    { background-color: #fff2f2; border: 1px solid #f5c6c6; color: #c0392b; }
-.toastSucesso { background-color: #f0faf4; border: 1px solid #b2dfcc; color: #1e7e44; }
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── MAIN ── */
 .secao {
     flex: 1;
     padding: 2rem;
     background-color: #ffffff;
-    box-sizing: border-box;
-    width: 100%;
 }
 
-/* ── BARRA TOPO ── */
+.erro    {     background-color: #d10000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+
+.sucesso {
+    background: #008a2e;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
 .barra {
     display: flex;
     align-items: center;
@@ -46,19 +34,9 @@
     margin-bottom: 1.5rem;
 }
 
-.titulo {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #5aabdd;
-    margin: 0;
-}
+.titulo { font-size: 1.4rem; font-weight: 800; color: #5aabdd; margin: 0; }
 
-.barraDireita {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-}
+.barraDireita { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
 
 .busca {
     padding: 0.5rem 1rem;
@@ -83,14 +61,9 @@
 }
 .btnLogout:hover { opacity: 0.85; }
 
-/* ── TABELA ── */
 .tabelaWrapper { width: 100%; overflow-x: auto; }
 
-.tabela {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-}
+.tabela { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 
 .tabela th {
     text-align: left;
@@ -109,19 +82,12 @@
 }
 
 .tabela tr:hover td { background-color: #f7fbff; }
+.vazio { text-align: center; color: #999; padding: 2rem !important; }
 
-.vazio {
-    text-align: center;
-    color: #999;
-    padding: 2rem !important;
-}
-
-/* ── STATUS ── */
 .ativo     { background-color: #e6f9ee; color: #1e7e44; padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
 .bloqueado { background-color: #fff2f2; color: #c0392b; padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
 .pendente  { background-color: #f0f0f0; color: #666;    padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
 
-/* ── BOTÕES DE AÇÃO ── */
 .acoes { display: flex; gap: 0.5rem; }
 
 .btnDesbloquear, .btnDeletar {
@@ -138,7 +104,6 @@
 .btnDeletar     { background-color: #e74c3c; color: #fff; }
 .btnDesbloquear:hover, .btnDeletar:hover { opacity: 0.85; }
 
-/* ── RESPONSIVO ── */
 @media (max-width: 600px) {
     .secao { padding: 1.5rem 1rem; }
     .busca { width: 100%; }

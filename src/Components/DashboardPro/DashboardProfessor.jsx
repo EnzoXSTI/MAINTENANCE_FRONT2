@@ -16,7 +16,7 @@ export default function DashboardProfessor() {
 
         async function carregarUsuario() {
             try {
-                const resposta = await fetch(`http://192.168.1.114:5000/buscar_usuarios/${idUsuario}`, {
+                const resposta = await fetch(`http://10.92.3.117:5000/buscar_usuarios/${idUsuario}`, {
                     credentials: 'include',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
@@ -39,7 +39,7 @@ export default function DashboardProfessor() {
 
     async function fazerLogout() {
         try {
-            await fetch('http://192.168.1.102:5000/logout', { method: 'POST', credentials: 'include' });
+            await fetch('http://10.92.3.117:5000/logout', { method: 'POST', credentials: 'include' });
         } catch {}
         localStorage.removeItem('id_usuario');
         localStorage.removeItem('token');
@@ -48,14 +48,9 @@ export default function DashboardProfessor() {
 
     return (
         <div className={css.pagina}>
-            <Header />
-
             <main className={css.secao}>
-                {erro && (
-                    <div className={`${css.toast} ${css.toastErro}`}>
-                        <span>{erro}</span>
-                    </div>
-                )}
+
+                {erro && <p className={css.erro}>{erro}</p>}
 
                 <div className={css.barra}>
                     <p className={css.saudacao}>
@@ -71,8 +66,6 @@ export default function DashboardProfessor() {
                     </div>
                 </div>
             </main>
-
-            <Footer />
         </div>
     );
 }

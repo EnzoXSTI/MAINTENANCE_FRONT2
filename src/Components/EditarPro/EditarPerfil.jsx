@@ -17,31 +17,23 @@ export default function EditarPerfil() {
 
     const navigate = useNavigate();
     const idUsuario = localStorage.getItem('id_usuario');
-    const token = localStorage.getItem('token');
 
     useEffect(() => {
         if (!erro && !mensagem) return;
-        const timer = setTimeout(() => {
-            setErro('');
-            setMensagem('');
-        }, 8000);
+        const timer = setTimeout(() => { setErro(''); setMensagem(''); }, 8000);
         return () => clearTimeout(timer);
     }, [erro, mensagem]);
 
     useEffect(() => {
-        if (!idUsuario) {
-            navigate('/');
-            return;
-        }
+        if (!idUsuario) { navigate('/'); return; }
 
         async function carregarUsuario() {
             try {
-                const resposta = await fetch(`http://192.168.1.114:5000/buscar_usuarios/${idUsuario}`, {
+                const resposta = await fetch(`http://10.92.3.117:5000/buscar_usuarios/${idUsuario}`, {
                     credentials: 'include',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
                 const dados = await resposta.json();
-
                 if (resposta.ok) {
                     setNome(dados.usuario.nome);
                     setEmail(dados.usuario.email);
@@ -65,19 +57,16 @@ export default function EditarPerfil() {
         const formData = new FormData();
         formData.append('nome', nome);
         formData.append('email', email);
-
         if (foto) formData.append('foto_perfil', foto);
 
         try {
-            const resposta = await fetch(`http://192.168.1.114:5000/editar_usuarios/${idUsuario}`, {
+            const resposta = await fetch(`http://10.92.3.117:5000/editar_usuarios/${idUsuario}`, {
                 method: 'PUT',
                 body: formData,
                 credentials: 'include',
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
-
             const dados = await resposta.json();
-
             if (resposta.ok) {
                 setMensagem("Perfil atualizado com sucesso!");
                 setTimeout(() => navigate('/DashboardProfessor'), 2000);
@@ -104,23 +93,12 @@ export default function EditarPerfil() {
     return (
         <div className={css.pagina}>
 
-            {erro && (
-                <div className={`${css.toast} ${css.toastErro}`}>
-                    <span>{erro}</span>
-                    <button className={css.toastFechar} onClick={() => setErro('')}>✕</button>
-                </div>
-            )}
-            {mensagem && (
-                <div className={`${css.toast} ${css.toastSucesso}`}>
-                    <span>{mensagem}</span>
-                    <button className={css.toastFechar} onClick={() => setMensagem('')}>✕</button>
-                </div>
-            )}
-
-            <Header />
-
             <main className={css.secao}>
                 <div className={css.conteudo}>
+
+                    {erro && <p className={css.erro}>{erro}</p>}
+                    {mensagem && <p className={css.sucesso}>{mensagem}</p>}
+
                     <div className={css.logo}>
                         <img src="/logo2.png" alt="Logo" className={css.logoImg} />
                         <span className={css.logoTexto}>MAINTENANCE</span>
@@ -135,7 +113,7 @@ export default function EditarPerfil() {
                         <Input label="E-mail" type="email" input={email}
                             alterarInput={(e) => setEmail(e.target.value)}
                             placeholder="Ex: usuario@gmail.com" />
-<InputArquivo label="Foto de perfil"
+                        <InputArquivo label="Foto de perfil"
                             alterarInput={(e) => setFoto(e.target.files[0])} />
                     </div>
 
@@ -143,10 +121,10 @@ export default function EditarPerfil() {
                         <Botao cor="Azul" texto="Salvar alterações" acao={editar} />
                         <Botao cor="Branco" texto="Voltar para Dashboard" pagina="/home" />
                     </div>
+
                 </div>
             </main>
 
-            <Footer />
         </div>
     );
 }

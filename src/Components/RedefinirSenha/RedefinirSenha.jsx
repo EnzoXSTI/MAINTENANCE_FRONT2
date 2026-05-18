@@ -16,10 +16,7 @@ export default function RedefinirSenha() {
 
     useEffect(() => {
         if (!erro && !mensagem) return;
-        const timer = setTimeout(() => {
-            setErro('');
-            setMensagem('');
-        }, 8000);
+        const timer = setTimeout(() => { setErro(''); setMensagem(''); }, 8000);
         return () => clearTimeout(timer);
     }, [erro, mensagem]);
 
@@ -40,7 +37,7 @@ export default function RedefinirSenha() {
         formData.append('confirmar_senha', confirmarSenha);
 
         try {
-            const resposta = await fetch('http://192.168.1.114:5000/redefinir_senha', {
+            const resposta = await fetch('http://10.92.3.117:5000/redefinir_senha', {
                 method: 'POST',
                 body: formData,
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -56,55 +53,40 @@ export default function RedefinirSenha() {
             } else {
                 setErro(dados.error || "Erro ao alterar a senha.");
             }
-        } catch (error) {
+        } catch {
             setErro("Erro de conexão com o servidor.");
         }
     }
 
     return (
         <div className={css.pagina}>
-
-            <Header />
             <main className={css.secao}>
+                <div className={css.conteudo}>
 
+                    {erro && <p className={css.erro}>{erro}</p>}
+                    {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
-            {erro && (
-                <div className={`${css.toast} ${css.toastErro}`}>
-                    <span>{erro}</span>
-                </div>
-            )}
-            {mensagem && (
-                <div className={`${css.toast} ${css.toastSucesso}`}>
-                    <span>{mensagem}</span>
-                </div>
-            )}
-<div className={css.conteudo}>
                     <div className={css.logo}>
                         <img src="/logo2.png" alt="Logo" className={css.logoImg} />
                         <span className={css.logoTexto}>MAINTENANCE</span>
                     </div>
+
                     <h2 className={css.titulo}>Redefinir senha</h2>
                     <p className={css.descricao}>Digite a nova senha abaixo e confirme para concluir a recuperação.</p>
+
                     <div className={css.campos}>
-                        <Input
-                            label="Nova Senha"
-                            type="password"
-                            input={senha}
+                        <Input label="Nova Senha" type="password" input={senha}
                             alterarInput={(e) => setSenha(e.target.value)}
-                            placeholder="Ex: Senha@123"
-                        />
-                        <Input
-                            label="Confirmar Senha"
-                            type="password"
-                            input={confirmarSenha}
+                            placeholder="Ex: Senha@123" />
+                        <Input label="Confirmar Senha" type="password" input={confirmarSenha}
                             alterarInput={(e) => setConfirmarSenha(e.target.value)}
-                            placeholder="Ex: Senha@123"
-                        />
+                            placeholder="Ex: Senha@123" />
                     </div>
+
                     <Botao cor="Azul" texto="Alterar senha" acao={alterarSenha} />
+
                 </div>
             </main>
-            <Footer />
         </div>
     );
 }

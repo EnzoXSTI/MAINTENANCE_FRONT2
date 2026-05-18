@@ -4,7 +4,7 @@ import Footer from "../../Components/Footer/Footer.jsx";
 import Header from "../../Components/Header/Header.jsx";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = 'http://192.168.1.114:5000';
+const BASE_URL = 'http://10.92.3.117:5000';
 
 export default function DashboardAdm() {
     const [usuarios, setUsuarios] = useState([]);
@@ -15,7 +15,6 @@ export default function DashboardAdm() {
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
-    // Proteção de rota — só ADM (tipo 0) entra
     useEffect(() => {
         const tipo = parseInt(localStorage.getItem('tipo_usuario'));
         if (tipo !== 0) { navigate('/'); return; }
@@ -104,30 +103,18 @@ export default function DashboardAdm() {
     return (
         <div className={css.pagina}>
             <Header />
-
             <main className={css.secao}>
 
-                {erro && (
-                    <div className={`${css.toast} ${css.toastErro}`}>
-                        <span>{erro}</span>
-                    </div>
-                )}
-                {mensagem && (
-                    <div className={`${css.toast} ${css.toastSucesso}`}>
-                        <span>{mensagem}</span>
-                    </div>
-                )}
+                {erro && <p className={css.erro}>{erro}</p>}
+                {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
                 <div className={css.barra}>
                     <p className={css.titulo}>Gerenciar Usuários</p>
                     <div className={css.barraDireita}>
-                        <input
-                            className={css.busca}
-                            type="text"
+                        <input className={css.busca} type="text"
                             placeholder="Buscar por nome ou e-mail..."
                             value={busca}
-                            onChange={(e) => setBusca(e.target.value)}
-                        />
+                            onChange={(e) => setBusca(e.target.value)} />
                         <button className={css.btnLogout} onClick={fazerLogout}>Logout</button>
                     </div>
                 </div>
@@ -177,7 +164,6 @@ export default function DashboardAdm() {
                 </div>
 
             </main>
-
             <Footer />
         </div>
     );
