@@ -31,7 +31,7 @@ export default function EnviarCodigo() {
         formData.append('email', email);
 
         try {
-            const resposta = await fetch('http://192.168.1.102:5000/esqueci_senha', {
+            const resposta = await fetch('http://192.168.1.114:5000/esqueci_senha', {
                 method: 'POST',
                 body: formData
             });

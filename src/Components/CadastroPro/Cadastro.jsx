@@ -41,7 +41,7 @@ export default function Cadastro() {
         if (foto) formData.append('foto_perfil', foto);
 
         try {
-            const resposta = await fetch('http://192.168.1.102:5000/criar_usuarios', {
+            const resposta = await fetch('http://192.168.1.114:5000/criar_usuarios', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'

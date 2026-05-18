@@ -36,7 +36,7 @@ export default function EditarPerfil() {
 
         async function carregarUsuario() {
             try {
-                const resposta = await fetch(`http://192.168.1.102:5000/buscar_usuarios/${idUsuario}`, {
+                const resposta = await fetch(`http://192.168.1.114:5000/buscar_usuarios/${idUsuario}`, {
                     credentials: 'include',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
@@ -69,7 +69,7 @@ export default function EditarPerfil() {
         if (foto) formData.append('foto_perfil', foto);
 
         try {
-            const resposta = await fetch(`http://192.168.1.102:5000/editar_usuarios/${idUsuario}`, {
+            const resposta = await fetch(`http://192.168.1.114:5000/editar_usuarios/${idUsuario}`, {
                 method: 'PUT',
                 body: formData,
                 credentials: 'include',

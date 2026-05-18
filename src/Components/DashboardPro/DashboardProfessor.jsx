@@ -16,7 +16,7 @@ export default function DashboardProfessor() {
 
         async function carregarUsuario() {
             try {
-                const resposta = await fetch(`http://192.168.1.102:5000/buscar_usuarios/${idUsuario}`, {
+                const resposta = await fetch(`http://192.168.1.114:5000/buscar_usuarios/${idUsuario}`, {
                     credentials: 'include',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });

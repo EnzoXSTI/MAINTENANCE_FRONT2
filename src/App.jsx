@@ -6,6 +6,7 @@ import EnviarCodigo from "./Components/EnviarCodigo/EnviarCodigo.jsx";
 import RedefinirSenha from "./Components/RedefinirSenha/RedefinirSenha.jsx";
 import EditarPerfil from "./Components/EditarPro/EditarPerfil.jsx";
 import DashboardPro from "./Components/DashboardPro/DashboardProfessor.jsx"
+import DashboardAdm from "./Components/DashboardAdm/DashboardAdm.jsx";
 
 export default function App() {
     return (
@@ -18,6 +19,7 @@ export default function App() {
                 <Route path="/redefinir-senha" element={<RedefinirSenha />} />
                 <Route path="/editar-perfil" element={<EditarPerfil />} />
                 <Route path="/DashboardProfessor" element={<DashboardPro/>} />
+                <Route path="/DashboardADM" element={<DashboardAdm />} />
             </Routes>
         </BrowserRouter>
     );

@@ -2,22 +2,24 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
 /* ── TOAST ── */
 .toast {
-    width: 100%;
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
     max-width: 420px;
-    margin: 0 auto 0.8rem auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0.7rem 1.2rem;
     border-radius: 8px;
     font-size: 0.88rem;
-    font-weight: 500;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     animation: slideDown 0.3s ease;
+    z-index: 999;
 }
 
 .toastErro {
@@ -33,28 +35,28 @@
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
+    from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
     to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
 
-
-/* ── RESTANTE ── */
+/* ── SEÇÃO ── */
 .secao {
     flex: 1;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2rem 1rem;
-    background-color: #ffffff;
-    box-sizing: border-box;
-    width: 100%;
+    background-image: url('/fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
+/* ── CONTEÚDO ── */
 .conteudo {
     width: 100%;
     max-width: 420px;
+    padding: 0 1rem;
 }
 
 .logo {
@@ -98,4 +100,15 @@
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 480px) {
+    .secao {
+        background-image: none;
+    }
+
+    .conteudo {
+        padding: 0 0.5rem;
+    }
 }

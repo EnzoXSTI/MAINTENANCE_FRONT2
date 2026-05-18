@@ -2,55 +2,66 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
+/* ── TOAST ── */
 .toast {
-    width: 100%;
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
     max-width: 420px;
-    margin: 0 auto 0.8rem auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0.7rem 1.2rem;
     border-radius: 8px;
     font-size: 0.88rem;
-    font-weight: 500;
+    animation: slideDown 0.3s ease;
+    z-index: 999;
 }
 
 .toastErro {
-    background-color: #dc5252;
-    border: 1px solid #dc5252;
-    color: #fff;
+    background-color: #fff2f2;
+    border: 1px solid #f5c6c6;
+    color: #c0392b;
 }
 
 .toastSucesso {
-    background-color: #56e84f;
-    border: 1px solid #56e84f;
-    color: #ffffff;
+    background-color: #f0faf4;
+    border: 1px solid #b2dfcc;
+    color: #1e7e44;
 }
 
+@keyframes slideDown {
+    from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── SEÇÃO ── */
 .secao {
     flex: 1;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2rem 1rem;
-    background-color: #ffffff;
-    box-sizing: border-box;
-    width: 100%;
+    background-image: url('/fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
+/* ── CONTEÚDO ── */
 .conteudoFormulario {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
+    padding: 0 1rem;
 }
 
 .logo {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 0.5rem;
     margin-bottom: 0.3rem;
 }
 
@@ -62,9 +73,8 @@
 .subtitulo {
     text-align: center;
     color: #5aabdd;
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
 }
 
 .campos {
@@ -89,4 +99,15 @@
     color: #5aabdd;
     font-weight: 700;
     text-decoration: none;
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 480px) {
+    .secao {
+        background-image: none;
+    }
+
+    .conteudoFormulario {
+        padding: 0 0.5rem;
+    }
 }
