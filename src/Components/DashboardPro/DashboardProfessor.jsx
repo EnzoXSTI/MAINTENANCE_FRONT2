@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import css from './DashboardProfessor.module.css';
-import Footer from "../../Components/Footer/Footer.jsx";
-import Header from "../../Components/Header/Header.jsx";
 import { useNavigate } from "react-router-dom";
 
 export default function DashboardProfessor() {
@@ -10,37 +8,47 @@ export default function DashboardProfessor() {
 
     const navigate = useNavigate();
     const idUsuario = localStorage.getItem('id_usuario');
+    const token = localStorage.getItem('token');
 
+    // Redireciona se não estiver logado
     useEffect(() => {
-        if (!idUsuario) { navigate('/'); return; }
-
-        async function carregarUsuario() {
-            try {
-                const resposta = await fetch(`http://10.92.3.117:5000/buscar_usuarios/${idUsuario}`, {
-                    credentials: 'include',
-                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-                });
-                const dados = await resposta.json();
-                if (resposta.ok) setUsuario(dados.usuario);
-                else setErro("Não foi possível carregar os dados.");
-            } catch {
-                setErro("Erro de conexão com o servidor.");
-            }
+        if (!idUsuario) {
+            navigate('/');
+            return;
         }
-
         carregarUsuario();
-    }, [idUsuario]);
+    }, []);
 
+    // Limpa o erro após 8 segundos
     useEffect(() => {
         if (!erro) return;
         const t = setTimeout(() => setErro(''), 8000);
         return () => clearTimeout(t);
     }, [erro]);
 
+    async function carregarUsuario() {
+        try {
+            const resposta = await fetch(`http://10.92.3.126:5000/buscar_usuarios/${idUsuario}`, {
+                credentials: 'include',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const dados = await resposta.json();
+
+            if (resposta.ok) {
+                setUsuario(dados.usuario);
+            } else {
+                setErro("Não foi possível carregar os dados.");
+            }
+        } catch {
+            setErro("Erro de conexão com o servidor.");
+        }
+    }
+
     async function fazerLogout() {
         try {
             await fetch('http://10.92.3.117:5000/logout', { method: 'POST', credentials: 'include' });
         } catch {}
+
         localStorage.removeItem('id_usuario');
         localStorage.removeItem('token');
         navigate('/');
@@ -54,17 +62,18 @@ export default function DashboardProfessor() {
 
                 <div className={css.barra}>
                     <p className={css.saudacao}>
-                        olá, <span className={css.nome}>{usuario?.nome || ''}!</span>
+                        Olá, <span className={css.nome}>{usuario?.nome || ''}!</span>
                     </p>
                     <div className={css.botoes}>
                         <button className={css.btnAzul} onClick={() => navigate('/editar-perfil')}>
                             Editar Perfil
                         </button>
                         <button className={css.btnAzulClaro} onClick={fazerLogout}>
-                            logout
+                            Logout
                         </button>
                     </div>
                 </div>
+
             </main>
         </div>
     );

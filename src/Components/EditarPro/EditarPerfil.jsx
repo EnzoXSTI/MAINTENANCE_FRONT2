@@ -13,7 +13,6 @@ export default function EditarPerfil() {
     const [foto, setFoto] = useState(null);
     const [erro, setErro] = useState('');
     const [mensagem, setMensagem] = useState('');
-    const [carregando, setCarregando] = useState(true);
 
     const navigate = useNavigate();
     const idUsuario = localStorage.getItem('id_usuario');
@@ -29,7 +28,7 @@ export default function EditarPerfil() {
 
         async function carregarUsuario() {
             try {
-                const resposta = await fetch(`http://10.92.3.117:5000/buscar_usuarios/${idUsuario}`, {
+                const resposta = await fetch(`http://10.92.3.126:5000/buscar_usuarios/${idUsuario}`, {
                     credentials: 'include',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
@@ -60,7 +59,7 @@ export default function EditarPerfil() {
         if (foto) formData.append('foto_perfil', foto);
 
         try {
-            const resposta = await fetch(`http://10.92.3.117:5000/editar_usuarios/${idUsuario}`, {
+            const resposta = await fetch(`http://10.92.3.126:5000/editar_usuarios/${idUsuario}`, {
                 method: 'PUT',
                 body: formData,
                 credentials: 'include',
@@ -76,18 +75,6 @@ export default function EditarPerfil() {
         } catch {
             setErro("Erro de conexão com o servidor.");
         }
-    }
-
-    if (carregando) {
-        return (
-            <div className={css.pagina}>
-                <Header />
-                <main className={css.secao}>
-                    <p style={{ color: '#5aabdd', textAlign: 'center' }}>Carregando...</p>
-                </main>
-                <Footer />
-            </div>
-        );
     }
 
     return (

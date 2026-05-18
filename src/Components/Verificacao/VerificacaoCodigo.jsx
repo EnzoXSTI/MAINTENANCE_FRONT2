@@ -39,8 +39,8 @@ export default function VerificacaoCodigo() {
 
         try {
             const rota = fluxo === 'cadastro'
-                ? 'http://10.92.3.117:5000/confirmar_email'
-                : 'http://10.92.3.117:5000/verificar_codigo';
+                ? 'http://10.92.3.126:5000/confirmar_email'
+                : 'http://10.92.3.126:5000/verificar_codigo';
 
             const resposta = await fetch(rota, { method: 'POST', body: formData });
             const dados = await resposta.json();

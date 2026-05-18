@@ -37,7 +37,7 @@ export default function RedefinirSenha() {
         formData.append('confirmar_senha', confirmarSenha);
 
         try {
-            const resposta = await fetch('http://10.92.3.117:5000/redefinir_senha', {
+            const resposta = await fetch('http://10.92.3.126:5000/redefinir_senha', {
                 method: 'POST',
                 body: formData,
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -68,7 +68,6 @@ export default function RedefinirSenha() {
 
                     <div className={css.logo}>
                         <img src="/logo2.png" alt="Logo" className={css.logoImg} />
-                        <span className={css.logoTexto}>MAINTENANCE</span>
                     </div>
 
                     <h2 className={css.titulo}>Redefinir senha</h2>

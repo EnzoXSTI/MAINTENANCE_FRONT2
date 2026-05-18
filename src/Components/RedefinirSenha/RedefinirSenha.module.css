@@ -40,7 +40,9 @@
     margin-bottom: 1rem;
 }
 
-.logoImg { height: 60px; width: auto; }
+.logoImg {
+    height: 60px;
+    width: auto; }
 
 .logoTexto {
     font-size: 1.1rem;
