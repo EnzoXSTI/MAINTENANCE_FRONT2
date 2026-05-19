@@ -29,7 +29,7 @@ export default function Login() {
         formData.append('senha', senha);
 
         try {
-            const resposta = await fetch('http://10.92.3.126:5000/login', {
+            const resposta = await fetch('http://10.92.3.147:5000/login', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'

@@ -2,13 +2,10 @@ import { useState, useEffect } from "react";
 import css from './DashboardAdm.module.css';
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = 'http://10.92.3.126:5000'; // endereço do servidor
+const BASE_URL = 'http://10.92.3.147:5000'; // endereço do servidor
 
 export default function DashboardAdm() {
 
-    // usuarios = lista de todos os usuários
-    // erro = mensagem vermelha de erro
-    // mensagem = mensagem verde de sucesso
     const [usuarios, setUsuarios] = useState([]);
     const [erro, setErro] = useState('');
     const [mensagem, setMensagem] = useState('');

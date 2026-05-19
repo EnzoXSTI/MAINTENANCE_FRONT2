@@ -31,12 +31,12 @@
     color: #ffffff;
 }
 
-/* Foto de perfil redonda no canto direito do header */
+
 .fotoPerfil {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;         /* deixa a foto redonda */
-    object-fit: cover;          /* corta a imagem pra caber no círculo */
-    border: 2px solid #5aabdd; /* borda azul igual ao tema */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #5aabdd;
     cursor: pointer;
 }

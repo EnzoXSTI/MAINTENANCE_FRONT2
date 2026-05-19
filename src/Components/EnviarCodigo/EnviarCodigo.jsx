@@ -28,7 +28,7 @@ export default function EnviarCodigo() {
         formData.append('email', email);
 
         try {
-            const resposta = await fetch('http://10.92.3.126:5000/esqueci_senha', {
+            const resposta = await fetch('http://10.92.3.147:5000/esqueci_senha', {
                 method: 'POST',
                 body: formData
             });
@@ -58,7 +58,7 @@ export default function EnviarCodigo() {
                     {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
                     <div className={css.logo}>
-                        <img src="/logo2.png" alt="Logo"  />
+                        <img src="/logo2.png" alt="Logo" className={css.logoImg} />
                     </div>
 
                     <h2 className={css.titulo}>Enviar código para e-mail</h2>
