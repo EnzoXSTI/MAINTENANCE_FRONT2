@@ -84,9 +84,10 @@
 .tabela tr:hover td { background-color: #f7fbff; }
 .vazio { text-align: center; color: #999; padding: 2rem !important; }
 
-.ativo     { background-color: #e6f9ee; color: #1e7e44; padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
+.pendente     {
+    background-color: #ebf9e6;
+    color: #1e7e44; padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
 .bloqueado { background-color: #fff2f2; color: #c0392b; padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
-.pendente  { background-color: #f0f0f0; color: #666;    padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
 
 .acoes { display: flex; gap: 0.5rem; }
 

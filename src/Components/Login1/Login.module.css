@@ -37,7 +37,13 @@
 }
 
 
-.sucesso { text-align: center; color: #1e7e44; font-size: 0.88rem; margin-bottom: 0.8rem; }
+.sucesso {
+    background: #008a2e;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
 
 .logo {
     display: flex;

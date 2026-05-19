@@ -35,7 +35,7 @@ export default function RedefinirSenha() {
         formData.append('confirmar_senha', confirmarSenha);
 
         try {
-            const resposta = await fetch('http://192.168.1.124:5000/redefinir_senha', {
+            const resposta = await fetch('http://10.92.3.126:5000/redefinir_senha', {
                 method: 'POST',
                 body: formData,
                 headers: { 'Authorization': `Bearer ${token}` }

@@ -4,7 +4,7 @@ import Input from "../../Components/Input/Input.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login1() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [erro, setErro] = useState('');
@@ -27,7 +27,7 @@ export default function Login() {
         formData.append('senha', senha);
 
         try {
-            const resposta = await fetch('http://192.168.1.124:5000/login', {
+            const resposta = await fetch('http://10.92.3.126:5000/login', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import css from './DashboardAdm.module.css';
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = 'http://192.168.1.124:5000'; // endereço do servidor
+const BASE_URL = 'http://10.92.3.126:5000'; // endereço do servidor
 
 export default function DashboardAdm() {
 
@@ -68,7 +68,7 @@ export default function DashboardAdm() {
 
             if (resposta.ok) {
                 setMensagem(dados.message);
-                carregarUsuarios(); // recarrega a lista pra refletir a mudança
+                carregarUsuarios();
             } else {
                 setErro(dados.error);
             }
@@ -89,7 +89,7 @@ export default function DashboardAdm() {
 
             if (resposta.ok) {
                 setMensagem(dados.message);
-                carregarUsuarios(); // recarrega a lista pra refletir a mudança
+                carregarUsuarios();
             } else {
                 setErro(dados.error);
             }
@@ -98,16 +98,15 @@ export default function DashboardAdm() {
         }
     }
 
-    // Desloga o ADM: avisa o servidor e limpa o navegador
     async function fazerLogout() {
         try {
             await fetch(`${BASE_URL}/logout`, { method: 'POST', credentials: 'include' });
         } catch {}
 
-        localStorage.removeItem('id_usuario');  // apaga o id do navegador
-        localStorage.removeItem('token');       // apaga o token do navegador
-        localStorage.removeItem('tipo_usuario');// apaga o tipo do navegador
-        navigate('/');                          // manda pro login
+        localStorage.removeItem('id_usuario');
+        localStorage.removeItem('token');
+        localStorage.removeItem('tipo_usuario');
+        navigate('/');
     }
 
     // Define o status do usuário baseado nos campos dele
@@ -117,13 +116,6 @@ export default function DashboardAdm() {
         return                          { label: 'Ativo',     classe: css.ativo     };
     }
 
-    // Converte o número do tipo em texto legível
-    function tipoLabel(tipo) {
-        if (tipo === 0) return 'ADM';
-        if (tipo === 1) return 'Prestador';
-        if (tipo === 2) return 'Empresa';
-        return tipo;
-    }
 
     return (
         <div className={css.pagina}>

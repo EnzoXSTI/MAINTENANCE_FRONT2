@@ -28,7 +28,7 @@ export default function EditarPerfil() {
 
         async function carregarUsuario() {
             try {
-                const resposta = await fetch(`http://192.168.1.124:5000/buscar_usuarios/${idUsuario}`, {
+                const resposta = await fetch(`http://10.92.3.126:5000/buscar_usuarios/${idUsuario}`, {
                     credentials: 'include',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
@@ -63,13 +63,12 @@ export default function EditarPerfil() {
                 return;
             }
 
-            // Enviando as chaves exatas que o seu backend (usuario.py) espera
             formData.append('senha', senha);
             formData.append('confirmar_senha', confirmarSenha);
         }
 
         try {
-            const resposta = await fetch(`http://192.168.1.124:5000/editar_usuarios/${idUsuario}`, {
+            const resposta = await fetch(`http://10.92.3.126:5000/editar_usuarios/${idUsuario}`, {
                 method: 'PUT',
                 body: formData,
                 credentials: 'include',

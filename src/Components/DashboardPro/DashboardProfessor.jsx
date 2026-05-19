@@ -28,7 +28,7 @@ export default function DashboardProfessor() {
 
     async function carregarUsuario() {
         try {
-            const resposta = await fetch(`http://192.168.1.124:5000/buscar_usuarios/${idUsuario}`, {
+            const resposta = await fetch(`http://10.92.3.126:5000/buscar_usuarios/${idUsuario}`, {
                 credentials: 'include',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -46,7 +46,7 @@ export default function DashboardProfessor() {
 
     async function fazerLogout() {
         try {
-            await fetch('http://192.168.1.124:5000/logout', { method: 'POST', credentials: 'include' });
+            await fetch('http://10.92.3.126:5000/logout', { method: 'POST', credentials: 'include' });
         } catch {}
 
         localStorage.removeItem('id_usuario');
