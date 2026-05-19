@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import css from './EnviarCodigo.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
-import Footer from "../../Components/Footer/Footer.jsx";
-import Header from "../../Components/Header/Header.jsx";
 import { useNavigate } from "react-router-dom";
 
 export default function EnviarCodigo() {
@@ -28,7 +26,7 @@ export default function EnviarCodigo() {
         formData.append('email', email);
 
         try {
-            const resposta = await fetch('http://10.92.3.147:5000/esqueci_senha', {
+            const resposta = await fetch('http://192.168.1.124:5000/esqueci_senha', {
                 method: 'POST',
                 body: formData
             });

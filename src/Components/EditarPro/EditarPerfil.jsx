@@ -28,7 +28,7 @@ export default function EditarPerfil() {
 
         async function carregarUsuario() {
             try {
-                const resposta = await fetch(`http://10.92.3.147:5000/buscar_usuarios/${idUsuario}`, {
+                const resposta = await fetch(`http://192.168.1.124:5000/buscar_usuarios/${idUsuario}`, {
                     credentials: 'include',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
@@ -69,7 +69,7 @@ export default function EditarPerfil() {
         }
 
         try {
-            const resposta = await fetch(`http://10.92.3.147:5000/editar_usuarios/${idUsuario}`, {
+            const resposta = await fetch(`http://192.168.1.124:5000/editar_usuarios/${idUsuario}`, {
                 method: 'PUT',
                 body: formData,
                 credentials: 'include',
@@ -101,7 +101,6 @@ export default function EditarPerfil() {
 
                     <div className={css.logo}>
                         <img src="/logo2.png" alt="Logo" className={css.logoImg} />
-                        <span className={css.logoTexto}>MAINTENANCE</span>
                     </div>
 
                     <p className={css.subtitulo}>Edite seu Perfil</p>

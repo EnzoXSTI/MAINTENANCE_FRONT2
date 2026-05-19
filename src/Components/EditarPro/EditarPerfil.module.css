@@ -46,18 +46,23 @@
     margin-bottom: 0.3rem;
 }
 
-.logoImg { height: 60px; width: auto; }
+.logoImg {
+    height: 7rem;
+    width: auto; }
 
-.logoTexto {
-    font-size: 1.1rem;
-    font-weight: 800;
+.subtitulo { text-align: center;
     color: #5aabdd;
-    letter-spacing: 0.05em;
-}
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem; }
 
-.subtitulo { text-align: center; color: #5aabdd; font-size: 1.3rem; margin-bottom: 1.2rem; }
-.campos { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.2rem; }
-.botoes { display: flex; flex-direction: column; gap: 0.8rem; }
+.campos { display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem; }
+
+.botoes { display: flex;
+    flex-direction: column;
+    gap: 0.8rem; }
 
 @media (max-width: 480px) {
     .secao { background-image: none; }

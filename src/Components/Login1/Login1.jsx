@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import css from './Login.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
-import Footer from "../../Components/Footer/Footer.jsx";
-import Header from "../../Components/Header/Header.jsx";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -29,7 +27,7 @@ export default function Login() {
         formData.append('senha', senha);
 
         try {
-            const resposta = await fetch('http://10.92.3.147:5000/login', {
+            const resposta = await fetch('http://192.168.1.124:5000/login', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
@@ -40,7 +38,7 @@ export default function Login() {
             if (resposta.ok) {
                 localStorage.setItem('id_usuario', dados.usuario.id);
                 localStorage.setItem('token', dados.token);
-                localStorage.setItem('tipo_usuario', dados.usuario.tipo); // ← adicionar isso
+                localStorage.setItem('tipo_usuario', dados.usuario.tipo);
 
                 if (dados.usuario.tipo === 0) {
                     navigate('/DashboardAdm');

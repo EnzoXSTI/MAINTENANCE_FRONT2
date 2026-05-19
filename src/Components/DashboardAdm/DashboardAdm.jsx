@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import css from './DashboardAdm.module.css';
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = 'http://10.92.3.147:5000'; // endereço do servidor
+const BASE_URL = 'http://192.168.1.124:5000'; // endereço do servidor
 
 export default function DashboardAdm() {
 
@@ -113,7 +113,7 @@ export default function DashboardAdm() {
     // Define o status do usuário baseado nos campos dele
     function statusUsuario(u) {
         if (!u.ativo)            return { label: 'Bloqueado', classe: css.bloqueado };
-        if (!u.email_confirmado) return { label: 'Pendente',  classe: css.pendente  };
+        if (!u.email_confirmado) return { label: 'Ativo',  classe: css.pendente  };
         return                          { label: 'Ativo',     classe: css.ativo     };
     }
 
@@ -135,7 +135,7 @@ export default function DashboardAdm() {
 
                 {/* Barra do topo com título e botão de logout */}
                 <div className={css.barra}>
-                    <p className={css.titulo}>Gerenciar Usuários</p>
+
                     <button className={css.btnLogout} onClick={fazerLogout}>Logout</button>
                 </div>
 
@@ -146,7 +146,6 @@ export default function DashboardAdm() {
                             <tr>
                                 <th>Nome</th>
                                 <th>E-mail</th>
-                                <th>Tipo</th>
                                 <th>Cadastro</th>
                                 <th>Status</th>
                                 <th>Ações</th>
@@ -168,7 +167,6 @@ export default function DashboardAdm() {
                                     <tr key={u.id}>
                                         <td>{u.nome}</td>
                                         <td>{u.email}</td>
-                                        <td>{tipoLabel(u.tipo)}</td>
                                         <td>{u.data_cadastro}</td>
                                         <td>
                                             <span className={status.classe}>{status.label}</span>

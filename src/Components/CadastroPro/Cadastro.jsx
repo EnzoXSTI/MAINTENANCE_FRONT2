@@ -3,8 +3,6 @@ import css from './Cadastro.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
-import Footer from "../../Components/Footer/Footer.jsx";
-import Header from "../../Components/Header/Header.jsx";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
@@ -12,7 +10,6 @@ export default function Cadastro() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
-    const [tipoUsuario, setTipoUsuario] = useState('1');
     const [foto, setFoto] = useState(null);
     const [mensagem, setMensagem] = useState('');
     const [erro, setErro] = useState('');
@@ -37,11 +34,10 @@ export default function Cadastro() {
         formData.append('email', email);
         formData.append('senha', senha);
         formData.append('confirmar_senha', confirmarSenha);
-        formData.append('tipo', tipoUsuario);
         if (foto) formData.append('foto_perfil', foto);
 
         try {
-            const resposta = await fetch('http://10.92.3.147:5000/criar_usuarios', {
+            const resposta = await fetch('http://192.168.1.124:5000/criar_usuarios', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
