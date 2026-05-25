@@ -56,7 +56,7 @@ export default function CadastrarAdm() {
         formData.append('tipo', '0');
 
         try {
-            const resposta = await fetch(`${BASE_URL}/cadastrar_usuario`, {
+            const resposta = await fetch(`${BASE_URL}/criar_usuarios`, {
                 method: 'POST',
                 body: formData,
                 credentials: 'include',
@@ -70,7 +70,7 @@ export default function CadastrarAdm() {
                 setEmail('');
                 setSenha('');
                 setConfirmarSenha('');
-                setTimeout(() => navigate('/DashboardAdm'), 2000);
+                setTimeout(() => navigate('/DashboardADM'), 2000);
             } else {
                 setErro(dados.error || "Erro ao cadastrar administrador.");
             }

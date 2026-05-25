@@ -54,7 +54,7 @@ export default function VerificacaoCodigo() {
                 setTimeout(() => {
                     if (fluxo === 'cadastro') {
                         localStorage.removeItem('email_recuperacao');
-                        navigate(origem === 'adm' ? '/DashboardAdm' : '/');
+                        navigate(origem === 'adm' ? '/DashboardADM' : '/');
                     } else {
                         navigate('/redefinir-senha');
                     }

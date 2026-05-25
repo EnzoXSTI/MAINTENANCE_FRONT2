@@ -3,7 +3,7 @@ import css from './EditarPerfil.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function EditarPerfil() {
     const [nome, setNome] = useState('');
@@ -13,9 +13,12 @@ export default function EditarPerfil() {
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [erro, setErro] = useState('');
     const [mensagem, setMensagem] = useState('');
+    const [emailOriginal, setEmailOriginal] = useState('');
 
     const navigate = useNavigate();
-    const idUsuario = localStorage.getItem('id_usuario');
+    const { id } = useParams();
+    const idUsuario = id || localStorage.getItem('id_usuario');
+    const editandoOutro = !!id;
 
     useEffect(() => {
         if (!erro && !mensagem) return;
@@ -34,6 +37,7 @@ export default function EditarPerfil() {
                 });
                 const dados = await resposta.json();
                 if (resposta.ok) {
+                    setEmailOriginal(dados.usuario.email);
                     setNome(dados.usuario.nome);
                     setEmail(dados.usuario.email);
                 } else {
@@ -45,7 +49,7 @@ export default function EditarPerfil() {
         }
 
         carregarUsuario();
-    }, [idUsuario, navigate]);
+    }, [idUsuario]);
 
     async function editar() {
         setErro('');
@@ -77,10 +81,14 @@ export default function EditarPerfil() {
             const dados = await resposta.json();
             if (resposta.ok) {
                 setMensagem("Perfil atualizado com sucesso!");
-                // Limpa os campos de senha após o sucesso
                 setSenha('');
                 setConfirmarSenha('');
-                setTimeout(() => navigate('/DashboardProfessor'), 2000);
+                if (dados.email_mudou) {
+                    localStorage.setItem('email_recuperacao', email);
+                    setTimeout(() => navigate('/verificacao?fluxo=cadastro&origem=adm'), 1500);
+                } else {
+                    setTimeout(() => navigate(editandoOutro ? '/DashboardADM' : '/DashboardProfessor'), 2000);
+                }
             } else {
                 // Exibe as mensagens detalhadas do back-end (Ex: senha fraca, senha antiga já usada...)
                 setErro(dados.error || "Erro ao atualizar perfil.");
@@ -127,7 +135,7 @@ export default function EditarPerfil() {
 
                     <div className={css.botoes}>
                         <Botao cor="Azul" texto="Salvar alterações" acao={editar} />
-                        <Botao cor="Branco" texto="Voltar para Dashboard" pagina="/DashboardProfessor" />
+                        <Botao cor="Branco" texto="Voltar para Dashboard" pagina={editandoOutro ? '/DashboardADM' : '/DashboardProfessor'} />
                     </div>
 
                 </div>
