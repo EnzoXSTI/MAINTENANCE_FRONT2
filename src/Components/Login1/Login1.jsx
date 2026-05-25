@@ -27,7 +27,7 @@ export default function Login1() {
         formData.append('senha', senha);
 
         try {
-            const resposta = await fetch('http://10.92.3.126:5000/login', {
+            const resposta = await fetch('http://10.92.3.149:5000/login', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
@@ -42,6 +42,8 @@ export default function Login1() {
 
                 if (dados.usuario.tipo === 0) {
                     navigate('/DashboardAdm');
+                } else if (dados.usuario.tipo === 2) {
+                    navigate('/DashboardTecnico');
                 } else {
                     navigate('/DashboardProfessor');
                 }

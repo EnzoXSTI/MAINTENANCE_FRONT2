@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import css from './Cadastro.module.css';
+import css from './CadastrarTecnico.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Cadastro() {
+export default function CadastrarTecnico() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
+    const [nif, setNif] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [foto, setFoto] = useState(null);
@@ -18,10 +19,7 @@ export default function Cadastro() {
 
     useEffect(() => {
         if (!erro && !mensagem) return;
-        const timer = setTimeout(() => {
-            setErro('');
-            setMensagem('');
-        }, 8000);
+        const timer = setTimeout(() => { setErro(''); setMensagem(''); }, 8000);
         return () => clearTimeout(timer);
     }, [erro, mensagem]);
 
@@ -32,8 +30,10 @@ export default function Cadastro() {
         const formData = new FormData();
         formData.append('nome', nome);
         formData.append('email', email);
+        formData.append('nif', nif);
         formData.append('senha', senha);
         formData.append('confirmar_senha', confirmarSenha);
+        formData.append('tipo', 2);
         if (foto) formData.append('foto_perfil', foto);
 
         try {
@@ -48,8 +48,7 @@ export default function Cadastro() {
             if (resposta.ok) {
                 setMensagem(dados.message);
                 localStorage.setItem('email_recuperacao', email);
-                const origem = localStorage.getItem('tipo_usuario') === '0' ? '&origem=adm' : '';
-                setTimeout(() => navigate(`/verificacao?fluxo=cadastro${origem}`), 2000);
+                setTimeout(() => navigate('/verificacao?fluxo=cadastro&origem=adm'), 2000);
             } else {
                 setErro(dados.error);
             }
@@ -61,7 +60,6 @@ export default function Cadastro() {
 
     return (
         <div className={css.pagina}>
-
             <main className={css.secao}>
                 <div className={css.conteudoFormulario}>
 
@@ -72,7 +70,7 @@ export default function Cadastro() {
                         <img src="/logo2.png" alt="Logo" className={css.logoImg} />
                     </div>
 
-                    <p className={css.subtitulo}>Faça seu Cadastro</p>
+                    <p className={css.subtitulo}>Cadastrar Técnico</p>
 
                     <div className={css.campos}>
                         <Input label="Nome" type="text" input={nome}
@@ -81,6 +79,9 @@ export default function Cadastro() {
                         <Input label="E-mail" type="email" input={email}
                             alterarInput={(e) => setEmail(e.target.value)}
                             placeholder="Ex: usuario@gmail.com" />
+                        <Input label="NIF" type="text" input={nif}
+                            alterarInput={(e) => setNif(e.target.value)}
+                            placeholder="Ex: 123456789" />
                         <Input label="Senha" type="password" input={senha}
                             alterarInput={(e) => setSenha(e.target.value)}
                             placeholder="Ex: Senha@123" />
@@ -102,7 +103,6 @@ export default function Cadastro() {
 
                 </div>
             </main>
-
         </div>
     );
 }

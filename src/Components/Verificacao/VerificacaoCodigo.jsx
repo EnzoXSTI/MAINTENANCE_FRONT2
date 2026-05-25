@@ -14,6 +14,7 @@ export default function VerificacaoCodigo() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const fluxo = searchParams.get('fluxo') || 'senha';
+    const origem = searchParams.get('origem') || '';
 
     useEffect(() => {
         if (!erro && !mensagem) return;
@@ -39,8 +40,8 @@ export default function VerificacaoCodigo() {
 
         try {
             const rota = fluxo === 'cadastro'
-                ? 'http://10.92.3.126:5000/confirmar_email'
-                : 'http://10.92.3.126:5000/verificar_codigo';
+                ? 'http://10.92.3.149:5000/confirmar_email'
+                : 'http://10.92.3.149:5000/verificar_codigo';
 
             const resposta = await fetch(rota, { method: 'POST', body: formData });
             const dados = await resposta.json();
@@ -53,7 +54,7 @@ export default function VerificacaoCodigo() {
                 setTimeout(() => {
                     if (fluxo === 'cadastro') {
                         localStorage.removeItem('email_recuperacao');
-                        navigate('/');
+                        navigate(origem === 'adm' ? '/DashboardAdm' : '/');
                     } else {
                         navigate('/redefinir-senha');
                     }

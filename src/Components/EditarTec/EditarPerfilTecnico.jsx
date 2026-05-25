@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import css from './EditarPerfil.module.css';
+import css from './EditarPerfilTecnico.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 import { useNavigate } from "react-router-dom";
 
-export default function EditarPerfil() {
+export default function EditarPerfilTecnico() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [foto, setFoto] = useState(null);
@@ -80,7 +80,7 @@ export default function EditarPerfil() {
                 // Limpa os campos de senha após o sucesso
                 setSenha('');
                 setConfirmarSenha('');
-                setTimeout(() => navigate('/DashboardProfessor'), 2000);
+                setTimeout(() => navigate('/DashboardTec'), 2000);
             } else {
                 // Exibe as mensagens detalhadas do back-end (Ex: senha fraca, senha antiga já usada...)
                 setErro(dados.error || "Erro ao atualizar perfil.");
@@ -127,7 +127,7 @@ export default function EditarPerfil() {
 
                     <div className={css.botoes}>
                         <Botao cor="Azul" texto="Salvar alterações" acao={editar} />
-                        <Botao cor="Branco" texto="Voltar para Dashboard" pagina="/DashboardProfessor" />
+                        <Botao cor="Branco" texto="Voltar para Dashboard" pagina="/DashboardTecnico" />
                     </div>
 
                 </div>

@@ -1,0 +1,92 @@
+.pagina {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.secao {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-image: url('/fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.conteudoFormulario {
+    width: 100%;
+    max-width: 420px;
+    padding: 0 1rem;
+}
+
+
+.erro {
+    background-color: #d10000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.sucesso {
+    background: #008a2e;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.3rem;
+}
+
+.logoImg {
+    height: 7rem;
+    width: auto;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #5aabdd;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
+}
+
+.areaBotao {
+    margin-bottom: 1rem;
+}
+
+.pergunta {
+    text-align: start;
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.linkLogin {
+    color: #5aabdd;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    .secao {
+        background-image: none;
+    }
+
+    .conteudoFormulario {
+        padding: 1rem;
+    }
+}

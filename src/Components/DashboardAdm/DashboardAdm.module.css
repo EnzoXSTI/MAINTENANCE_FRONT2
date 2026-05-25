@@ -2,21 +2,46 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-
-.secao {
-    flex: 1;
-    padding: 2rem;
     background-color: #ffffff;
 }
 
-.erro    {     background-color: #d10000;
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 2rem;
+    border-bottom: 1px solid #e8e8e8;
+    background-color: #fff;
+}
+
+.logoImg {
+    height: 3rem;
+    width: auto;
+}
+
+.avatarHeader {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ccc;
+}
+
+/* ── Main ── */
+.secao {
+    flex: 1;
+    padding: 2rem 2.5rem;
+}
+
+.erro {
+    background-color: #d10000;
     color: #fff;
     padding: 10px;
     border-radius: 6px;
     text-align: center;
+    margin-bottom: 1rem;
 }
-
 
 .sucesso {
     background: #008a2e;
@@ -24,34 +49,36 @@
     padding: 10px;
     border-radius: 6px;
     text-align: center;
+    margin-bottom: 1rem;
 }
+
+/* ── Saudação ── */
 .barra {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 1.5rem;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
-.titulo { font-size: 1.4rem; font-weight: 800; color: #5aabdd; margin: 0; }
-
-.barraDireita { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
-
-.busca {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    outline: none;
-    width: 240px;
+.saudacao {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
 }
-.busca:focus { border-color: #5aabdd; }
 
-.btnLogout {
+.nome {
+    color: #5aabdd;
+}
+
+.botoesBarra {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.btnAzul, .btnAzulClaro {
     padding: 0.45rem 1.2rem;
-    background-color: #a8d4ee;
-    color: #fff;
     border: none;
     border-radius: 6px;
     font-size: 0.9rem;
@@ -59,54 +86,169 @@
     cursor: pointer;
     transition: opacity 0.2s;
 }
-.btnLogout:hover { opacity: 0.85; }
 
-.tabelaWrapper { width: 100%; overflow-x: auto; }
+.btnAzul      { background-color: #5aabdd; color: #fff; }
+.btnAzulClaro { background-color: #a8d4ee; color: #fff; }
+.btnAzul:hover, .btnAzulClaro:hover { opacity: 0.85; }
 
-.tabela { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+/* ── Seção Professores ── */
+.secaoProfessores {
+    margin-top: 1rem;
+}
 
-.tabela th {
-    text-align: left;
-    padding: 0.75rem 1rem;
+.cabecalhoProfessores {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tituloProfessores {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+}
+
+.botoesHeader {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.btnCadastrar {
+    padding: 0.4rem 1.1rem;
     background-color: #5aabdd;
     color: #fff;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.tabela td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f0f0f0;
-    color: #333;
-    white-space: nowrap;
-}
-
-.tabela tr:hover td { background-color: #f7fbff; }
-.vazio { text-align: center; color: #999; padding: 2rem !important; }
-
-.pendente     {
-    background-color: #ebf9e6;
-    color: #1e7e44; padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
-.bloqueado { background-color: #fff2f2; color: #c0392b; padding: 0.25rem 0.7rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
-
-.acoes { display: flex; gap: 0.5rem; }
-
-.btnDesbloquear, .btnDeletar {
-    padding: 0.35rem 0.85rem;
     border: none;
     border-radius: 6px;
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
     transition: opacity 0.2s;
 }
+.btnCadastrar:hover { opacity: 0.85; }
 
-.btnDesbloquear { background-color: #5aabdd; color: #fff; }
-.btnDeletar     { background-color: #e74c3c; color: #fff; }
-.btnDesbloquear:hover, .btnDeletar:hover { opacity: 0.85; }
+.btnCadastrarAdm {
+    padding: 0.4rem 1.1rem;
+    background-color: #fff;
+    color: #5aabdd;
+    border: 1.5px solid #5aabdd;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.btnCadastrarAdm:hover {
+    background-color: #5aabdd;
+    color: #fff;
+}
 
+/* ── Carrossel ── */
+.carrosselWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.carrossel {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0.5rem 0.2rem 1rem;
+    flex: 1;
+    /* esconde scrollbar */
+    scrollbar-width: none;
+}
+.carrossel::-webkit-scrollbar { display: none; }
+
+.btnSeta {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+.btnSeta:hover { background: #f0f0f0; }
+
+/* ── Card ── */
+.card {
+    min-width: 220px;
+    max-width: 220px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 4px 16px rgba(90,171,221,0.15); }
+
+.cardAvatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #d0d0d0;
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardNome {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #222;
+    text-align: center;
+    margin: 0;
+}
+
+.btnInativar {
+    width: 100%;
+    padding: 0.5rem;
+    background: #fff;
+    color: #5aabdd;
+    border: 1.5px solid #5aabdd;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.btnInativar:hover {
+    background: #5aabdd;
+    color: #fff;
+}
+
+.vazio {
+    color: #999;
+    font-size: 0.95rem;
+    padding: 2rem;
+}
+
+/* ── Responsivo ── */
 @media (max-width: 600px) {
     .secao { padding: 1.5rem 1rem; }
-    .busca { width: 100%; }
+    .header { padding: 0.8rem 1rem; }
     .barra { flex-direction: column; align-items: flex-start; }
+    .card { min-width: 180px; max-width: 180px; }
 }

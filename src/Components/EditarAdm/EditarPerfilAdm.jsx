@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-import css from './EditarPerfil.module.css';
+import css from './EditarPerfilAdm.module.css';
 import Input from "../../Components/Input/Input.jsx";
-import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 import { useNavigate } from "react-router-dom";
 
-export default function EditarPerfil() {
+export default function EditarPerfilAdm() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
-    const [foto, setFoto] = useState(null);
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [erro, setErro] = useState('');
@@ -54,7 +52,6 @@ export default function EditarPerfil() {
         const formData = new FormData();
         formData.append('nome', nome);
         formData.append('email', email);
-        if (foto) formData.append('foto_perfil', foto);
 
         // Se o usuário preencheu algum campo de senha
         if (senha || confirmarSenha) {
@@ -80,7 +77,7 @@ export default function EditarPerfil() {
                 // Limpa os campos de senha após o sucesso
                 setSenha('');
                 setConfirmarSenha('');
-                setTimeout(() => navigate('/DashboardProfessor'), 2000);
+                setTimeout(() => navigate('/DashboardAdm'), 2000);
             } else {
                 // Exibe as mensagens detalhadas do back-end (Ex: senha fraca, senha antiga já usada...)
                 setErro(dados.error || "Erro ao atualizar perfil.");
@@ -121,13 +118,11 @@ export default function EditarPerfil() {
                                alterarInput={(e) => setConfirmarSenha(e.target.value)}
                                placeholder="Confirme a nova senha" />
 
-                        <InputArquivo label="Foto de perfil"
-                                      alterarInput={(e) => setFoto(e.target.files[0])} />
                     </div>
 
                     <div className={css.botoes}>
                         <Botao cor="Azul" texto="Salvar alterações" acao={editar} />
-                        <Botao cor="Branco" texto="Voltar para Dashboard" pagina="/DashboardProfessor" />
+                        <Botao cor="Branco" texto="Voltar para Dashboard" pagina="/DashboardAdm" />
                     </div>
 
                 </div>

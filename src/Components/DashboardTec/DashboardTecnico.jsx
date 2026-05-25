@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import css from './DashboardProfessor.module.css';
+import css from './DashboardTecnico.module.css';
 import { useNavigate } from "react-router-dom";
 
-export default function DashboardProfessor() {
+export default function DashboardTecnico() {
     const [usuario, setUsuario] = useState(null);
     const [erro, setErro] = useState('');
 
@@ -65,7 +65,7 @@ export default function DashboardProfessor() {
                         Olá, <span className={css.nome}>{usuario?.nome || ''}!</span>
                     </p>
                     <div className={css.botoes}>
-                        <button className={css.btnAzul} onClick={() => navigate('/editar-perfil')}>
+                        <button className={css.btnAzul} onClick={() => navigate('/editarTec')}>
                             Editar Perfil
                         </button>
                         <button className={css.btnAzulClaro} onClick={fazerLogout}>

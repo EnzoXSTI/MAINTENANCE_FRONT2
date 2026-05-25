@@ -1,0 +1,49 @@
+.pagina {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.secao {
+    flex: 1;
+    padding: 2rem;
+    background-color: #ffffff;
+}
+
+.erro {
+    background-color: #d10000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center; }
+
+.barra {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.saudacao { font-size: 1.4rem; font-weight: 400; color: #222; margin: 0; }
+.nome { font-weight: 800; color: #5aabdd; }
+
+.botoes { display: flex; gap: 0.6rem; }
+
+.btnAzul, .btnAzulClaro {
+    padding: 0.45rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btnAzul { background-color: #5aabdd; color: #ffffff; }
+.btnAzulClaro { background-color: #a8d4ee; color: #ffffff; }
+.btnAzul:hover, .btnAzulClaro:hover { opacity: 0.85; }
+
+@media (max-width: 480px) {
+    .secao { padding: 1.5rem 1rem; }
+    .barra { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}

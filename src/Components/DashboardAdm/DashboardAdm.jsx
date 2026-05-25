@@ -1,43 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import css from './DashboardAdm.module.css';
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = 'http://10.92.3.126:5000'; // endereço do servidor
+const BASE_URL = 'http://10.92.3.149:5000';
 
 export default function DashboardAdm() {
-
     const [usuarios, setUsuarios] = useState([]);
+    const [adm, setAdm] = useState(null);
     const [erro, setErro] = useState('');
     const [mensagem, setMensagem] = useState('');
 
-    const navigate = useNavigate(); // serve pra trocar de página
-    const token = localStorage.getItem('token'); // pega o token salvo no navegador
+    const carrosselRef = useRef(null);
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+    const idUsuario = localStorage.getItem('id_usuario');
 
-    // Roda uma vez quando a página abre
     useEffect(() => {
-
-        // Pega o tipo do usuário salvo no navegador (0 = ADM)
         const tipo = parseInt(localStorage.getItem('tipo_usuario'));
-
-        // Se não for ADM, manda pro login
-        if (tipo !== 0) {
-            navigate('/');
-            return;
-        }
-
-        // Se for ADM, carrega a lista de usuários
+        if (tipo !== 0) { navigate('/'); return; }
         carregarUsuarios();
-
+        carregarAdm();
     }, []);
 
-    // Toda vez que aparecer erro ou mensagem, some com eles depois de 8 segundos
     useEffect(() => {
         if (!erro && !mensagem) return;
         const t = setTimeout(() => { setErro(''); setMensagem(''); }, 8000);
         return () => clearTimeout(t);
     }, [erro, mensagem]);
 
-    // Busca todos os usuários no servidor e salva na lista
+    async function carregarAdm() {
+        try {
+            const resposta = await fetch(`${BASE_URL}/buscar_usuarios/${idUsuario}`, {
+                credentials: 'include',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const dados = await resposta.json();
+            if (resposta.ok) setAdm(dados.usuario);
+        } catch {}
+    }
+
     async function carregarUsuarios() {
         try {
             const resposta = await fetch(`${BASE_URL}/listar_usuarios`, {
@@ -45,9 +46,9 @@ export default function DashboardAdm() {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const dados = await resposta.json();
-
             if (resposta.ok) {
-                setUsuarios(dados.usuarios); // atualiza a lista na tela
+                // Filtra só professores (tipo != 0)
+                setUsuarios(dados.usuarios.filter(u => u.tipo !== 0));
             } else {
                 setErro(dados.error || "Erro ao carregar usuários.");
             }
@@ -56,8 +57,7 @@ export default function DashboardAdm() {
         }
     }
 
-    // Desbloqueia um usuário pelo id
-    async function desbloquear(id) {
+    async function inativar(id) {
         try {
             const resposta = await fetch(`${BASE_URL}/desbloquear_usuario/${id}`, {
                 method: 'PUT',
@@ -65,120 +65,107 @@ export default function DashboardAdm() {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const dados = await resposta.json();
-
-            if (resposta.ok) {
-                setMensagem(dados.message);
-                carregarUsuarios();
-            } else {
-                setErro(dados.error);
-            }
-        } catch {
-            setErro("Erro de conexão com o servidor.");
-        }
-    }
-
-    // Deleta um usuário pelo id (sem confirmação)
-    async function deletar(id) {
-        try {
-            const resposta = await fetch(`${BASE_URL}/deletar_usuarios/${id}`, {
-                method: 'DELETE',
-                credentials: 'include',
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const dados = await resposta.json();
-
-            if (resposta.ok) {
-                setMensagem(dados.message);
-                carregarUsuarios();
-            } else {
-                setErro(dados.error);
-            }
+            if (resposta.ok) { setMensagem(dados.message); carregarUsuarios(); }
+            else setErro(dados.error);
         } catch {
             setErro("Erro de conexão com o servidor.");
         }
     }
 
     async function fazerLogout() {
-        try {
-            await fetch(`${BASE_URL}/logout`, { method: 'POST', credentials: 'include' });
-        } catch {}
-
+        try { await fetch(`${BASE_URL}/logout`, { method: 'POST', credentials: 'include' }); } catch {}
         localStorage.removeItem('id_usuario');
         localStorage.removeItem('token');
         localStorage.removeItem('tipo_usuario');
         navigate('/');
     }
 
-    // Define o status do usuário baseado nos campos dele
-    function statusUsuario(u) {
-        if (!u.ativo)            return { label: 'Bloqueado', classe: css.bloqueado };
-        if (!u.email_confirmado) return { label: 'Ativo',  classe: css.pendente  };
-        return                          { label: 'Ativo',     classe: css.ativo     };
+    function scrollCarrossel(direcao) {
+        if (carrosselRef.current) {
+            carrosselRef.current.scrollBy({ left: direcao * 320, behavior: 'smooth' });
+        }
     }
-
 
     return (
         <div className={css.pagina}>
+
+            {/* Header */}
+            <header className={css.header}>
+                <div className={css.headerLogo}>
+                    <img src="/logo2.png" alt="Logo" className={css.logoImg} />
+                </div>
+                <div className={css.headerPerfil}>
+                    <img
+                        src={adm?.foto_perfil ? `${BASE_URL}/${adm.foto_perfil}` : '/avatar.png'}
+                        alt="Perfil"
+                        className={css.avatarHeader}
+                    />
+                </div>
+            </header>
+
             <main className={css.secao}>
 
-                {/* Mostra erro (vermelho) ou sucesso (verde) se tiver */}
                 {erro     && <p className={css.erro}>{erro}</p>}
                 {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
-                {/* Barra do topo com título e botão de logout */}
+                {/* Saudação */}
                 <div className={css.barra}>
-
-                    <button className={css.btnLogout} onClick={fazerLogout}>Logout</button>
+                    <h1 className={css.saudacao}>
+                        olá, <span className={css.nome}>{adm?.nome || 'ADM'}!</span>
+                    </h1>
+                    <div className={css.botoesBarra}>
+                        <button className={css.btnAzul} onClick={() => navigate('/editarAdm')}>
+                            Editar Perfil
+                        </button>
+                        <button className={css.btnAzulClaro} onClick={fazerLogout}>
+                            logout
+                        </button>
+                    </div>
                 </div>
 
-                {/* Tabela com todos os usuários */}
-                <div className={css.tabelaWrapper}>
-                    <table className={css.tabela}>
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Cadastro</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                {/* Seção de professores */}
+                <div className={css.secaoProfessores}>
+                    <div className={css.cabecalhoProfessores}>
+                        <h2 className={css.tituloProfessores}>Professores Cadastrados</h2>
+                        <div className={css.botoesHeader}>
+                            <button className={css.btnCadastrar} onClick={() => navigate('/cadastro')}>
+                                Cadastrar Professor
+                            </button>
+                            <button className={css.btnCadastrarAdm} onClick={() => navigate('/cadastrarAdm')}>
+                                Cadastrar ADM
+                            </button>
+                        </div>
+                    </div>
 
-                            {/* Se não tiver nenhum usuário, mostra essa mensagem */}
+                    <div className={css.carrosselWrapper}>
+                        <button className={css.btnSeta} onClick={() => scrollCarrossel(-1)}>&#8249;</button>
+
+                        <div className={css.carrossel} ref={carrosselRef}>
                             {usuarios.length === 0 && (
-                                <tr>
-                                    <td colSpan={6} className={css.vazio}>Nenhum usuário encontrado.</td>
-                                </tr>
+                                <p className={css.vazio}>Nenhum professor cadastrado.</p>
                             )}
+                            {usuarios.map(u => (
+                                <div key={u.id} className={css.card}>
+                                    <div className={css.cardAvatar}>
+                                        <img
+                                            src={u.foto_perfil ? `${BASE_URL}/${u.foto_perfil}` : '/avatar.png'}
+                                            alt={u.nome}
+                                            className={css.avatarImg}
+                                        />
+                                    </div>
+                                    <p className={css.cardNome}>{u.nome}</p>
+                                    <button
+                                        className={css.btnInativar}
+                                        onClick={() => inativar(u.id)}
+                                    >
+                                        Inativar Professor
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
 
-                            {/* Percorre a lista e cria uma linha por usuário */}
-                            {usuarios.map(u => {
-                                const status = statusUsuario(u);
-                                return (
-                                    <tr key={u.id}>
-                                        <td>{u.nome}</td>
-                                        <td>{u.email}</td>
-                                        <td>{u.data_cadastro}</td>
-                                        <td>
-                                            <span className={status.classe}>{status.label}</span>
-                                        </td>
-                                        <td className={css.acoes}>
-                                            {/* Só aparece o botão Desbloquear se o usuário estiver bloqueado */}
-                                            {!u.ativo && (
-                                                <button className={css.btnDesbloquear} onClick={() => desbloquear(u.id)}>
-                                                    Desbloquear
-                                                </button>
-                                            )}
-                                            <button className={css.btnDeletar} onClick={() => deletar(u.id)}>
-                                                Deletar
-                                            </button>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                        <button className={css.btnSeta} onClick={() => scrollCarrossel(1)}>&#8250;</button>
+                    </div>
                 </div>
 
             </main>
