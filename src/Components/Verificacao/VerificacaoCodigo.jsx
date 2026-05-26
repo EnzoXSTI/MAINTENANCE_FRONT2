@@ -89,9 +89,13 @@ export default function VerificacaoCodigo() {
                     </p>
 
                     <div className={css.campos}>
-                        <Input type="text" input={codigo}
-                            alterarInput={(e) => setCodigo(e.target.value)}
-                            placeholder="Ex: 123456" />
+                        {/*<Input type="text" input={codigo}*/}
+                        {/*    alterarInput={(e) => setCodigo(e.target.value)}*/}
+                        {/*    placeholder="Ex: 123456" aceita={'numero'} limite={6}/>*/}
+                        <Input value={codigo} onChange={setCodigo}
+                               alterarInput={(e) => setCodigo(e.target.value)}
+                               aceita="numeros" limite={6}
+                               placeholder="Ex: 123456" />
                     </div>
 
                     <div className={css.botoes}>
