@@ -202,6 +202,20 @@
 }
 .btnInativar:hover { background: #5aabdd; color: #fff; }
 
+.btnDesbloquear {
+    width: 100%;
+    padding: 0.45rem;
+    background: #fff;
+    color: #008a2e;
+    border: 1.5px solid #008a2e;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.btnDesbloquear:hover { background: #008a2e; color: #fff; }
+
 .vazio { color: #999; font-size: 0.95rem; padding: 1rem; }
 
 /* Responsivo */

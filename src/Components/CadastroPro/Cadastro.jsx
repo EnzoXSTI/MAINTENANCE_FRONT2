@@ -3,7 +3,7 @@ import css from './Cadastro.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Cadastro() {
     const [nome, setNome] = useState('');
@@ -15,6 +15,8 @@ export default function Cadastro() {
     const [erro, setErro] = useState('');
 
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const origem = searchParams.get('origem') || '';
 
     useEffect(() => {
         if (!erro && !mensagem) return;
@@ -48,8 +50,7 @@ export default function Cadastro() {
             if (resposta.ok) {
                 setMensagem(dados.message);
                 localStorage.setItem('email_recuperacao', email);
-                const origem = localStorage.getItem('tipo_usuario') === '0' ? '&origem=adm' : '';
-                setTimeout(() => navigate(`/verificacao?fluxo=cadastro${origem}`), 2000);
+                setTimeout(() => navigate(`/verificacao?fluxo=cadastro${origem ? `&origem=${origem}` : ''}`), 2000);
             } else {
                 setErro(dados.error);
             }

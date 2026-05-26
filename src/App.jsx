@@ -24,23 +24,14 @@ export default function App() {
                 <Route path="/verificacao" element={<Verificar />} />
                 <Route path="/enviarcodigo" element={<EnviarCode />} />
                 <Route path="/redefinir-senha" element={<Redefinir />} />
-
-                {/* Professor */}
-                <Route path="/DashboardProfessor" element={<DashboardP />} />
+                <Route path="/DashboardPro" element={<DashboardP />} />
                 <Route path="/editarPro/:id" element={<EditarProf />} />
                 <Route path="/cadastrarPro" element={<Cadastrar />} />
-
-                {/* Técnico */}
                 <Route path="/DashboardTec" element={<DashboardTecnico />} />
                 <Route path="/cadastrarTec" element={<CadastrarTecnico />} />
-                {/* Sem :id = editar o próprio perfil; Com :id = ADM editando outro usuário */}
-                <Route path="/EditarTec" element={<EditarPerfilTecnico />} />
                 <Route path="/EditarTec/:id" element={<EditarPerfilTecnico />} />
-
-                {/* ADM */}
                 <Route path="/DashboardADM" element={<DashboardA />} />
                 <Route path="/cadastrarAdm" element={<CadastrarAdm />} />
-                <Route path="/EditarAdm" element={<EditarPerfilAdm />} />
                 <Route path="/EditarAdm/:id" element={<EditarPerfilAdm />} />
             </Routes>
 

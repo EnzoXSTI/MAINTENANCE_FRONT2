@@ -12,7 +12,6 @@ const SECOES = [
         tipo: 1,
         rotaEditar: '/editarPro',
         labelEditar: 'Editar Professor',
-        labelInativar: 'Inativar Professor',
     },
     {
         titulo: 'Técnicos Cadastrados',
@@ -21,7 +20,6 @@ const SECOES = [
         tipo: 2,
         rotaEditar: '/EditarTec',
         labelEditar: 'Editar Técnico',
-        labelInativar: 'Inativar Técnico',
     },
     {
         titulo: 'ADMs Cadastrados',
@@ -30,7 +28,6 @@ const SECOES = [
         tipo: 0,
         rotaEditar: '/EditarAdm',
         labelEditar: 'Editar ADM',
-        labelInativar: 'Inativar ADM',
     },
 ];
 
@@ -85,9 +82,12 @@ export default function DashboardAdm() {
         }
     }
 
-    async function inativar(id) {
+    async function toggleAtivo(id, ativo) {
+        const rota = ativo
+            ? `${BASE_URL}/bloquear_usuario/${id}`
+            : `${BASE_URL}/desbloquear_usuario/${id}`;
         try {
-            const r = await fetch(`${BASE_URL}/desbloquear_usuario/${id}`, {
+            const r = await fetch(rota, {
                 method: 'PUT',
                 credentials: 'include',
                 headers: { Authorization: `Bearer ${token}` },
@@ -123,7 +123,7 @@ export default function DashboardAdm() {
                         olá, <span className={css.nome}>{adm?.nome || 'ADM'}!</span>
                     </h1>
                     <div className={css.botoesBarra}>
-                        <button className={css.btnAzul} onClick={() => navigate('/EditarAdm')}>
+                        <button className={css.btnAzul} onClick={() => navigate(`/EditarAdm/${idUsuario}`)}>
                             Editar Perfil
                         </button>
                         <button className={css.btnAzulClaro} onClick={fazerLogout}>
@@ -168,10 +168,10 @@ export default function DashboardAdm() {
                                                     {s.labelEditar}
                                                 </button>
                                                 <button
-                                                    className={css.btnInativar}
-                                                    onClick={() => inativar(u.id)}
+                                                    className={u.ativo ? css.btnInativar : css.btnDesbloquear}
+                                                    onClick={() => toggleAtivo(u.id, u.ativo)}
                                                 >
-                                                    {s.labelInativar}
+                                                    {u.ativo ? 'Bloquear' : 'Desbloquear'}
                                                 </button>
                                             </div>
                                         ))

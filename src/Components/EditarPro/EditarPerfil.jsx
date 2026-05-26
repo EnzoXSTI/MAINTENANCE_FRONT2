@@ -135,7 +135,7 @@ export default function EditarPerfil() {
 
                     <div className={css.botoes}>
                         <Botao cor="Azul" texto="Salvar alterações" acao={editar} />
-                        <Botao cor="Branco" texto="Voltar para Dashboard" pagina={editandoOutro ? '/DashboardADM' : '/DashboardProfessor'} />
+                        <Botao cor="Branco" texto="Voltar para Dashboard" pagina={editandoOutro ? '/DashboardADM' : '/DashboardPro'} />
                     </div>
 
                 </div>

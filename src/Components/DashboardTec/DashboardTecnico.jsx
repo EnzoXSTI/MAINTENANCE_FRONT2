@@ -65,7 +65,7 @@ export default function DashboardTecnico() {
                         Olá, <span className={css.nome}>{usuario?.nome || ''}!</span>
                     </p>
                     <div className={css.botoes}>
-                        <button className={css.btnAzul} onClick={() => navigate('/editarTec')}>
+                        <button className={css.btnAzul} onClick={() => navigate(`/editarTec/${idUsuario}`)}>
                             Editar Perfil
                         </button>
                         <button className={css.btnAzulClaro} onClick={fazerLogout}>

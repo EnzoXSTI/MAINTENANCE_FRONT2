@@ -65,7 +65,7 @@ export default function DashboardProfessor() {
                         Olá, <span className={css.nome}>{usuario?.nome || ''}!</span>
                     </p>
                     <div className={css.botoes}>
-                        <button className={css.btnAzul} onClick={() => navigate('/editar-perfil')}>
+                        <button className={css.btnAzul} onClick={() => navigate(`/editarPro/${idUsuario}`)}>
                             Editar Perfil
                         </button>
                         <button className={css.btnAzulClaro} onClick={fazerLogout}>
