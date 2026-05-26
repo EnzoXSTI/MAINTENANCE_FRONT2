@@ -4,7 +4,7 @@ import Input from "../../Components/Input/Input.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 
-const BASE_URL = 'http://10.92.3.149:5000';
+const BASE_URL = 'http://localhost:5000';
 
 export default function EditarPerfilAdm() {
     const [nome, setNome] = useState('');

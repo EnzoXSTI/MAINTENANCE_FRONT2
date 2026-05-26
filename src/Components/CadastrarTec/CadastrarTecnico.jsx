@@ -37,7 +37,7 @@ export default function CadastrarTecnico() {
         if (foto) formData.append('foto_perfil', foto);
 
         try {
-            const resposta = await fetch('http://10.92.3.149:5000/criar_usuarios', {
+            const resposta = await fetch('http://localhost:5000 /criar_usuarios', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
@@ -73,23 +73,30 @@ export default function CadastrarTecnico() {
                     <p className={css.subtitulo}>Cadastrar Técnico</p>
 
                     <div className={css.campos}>
+
                         <Input label="Nome" type="text" input={nome}
                             alterarInput={(e) => setNome(e.target.value)}
                             placeholder="Ex: nome sobrenome" />
+
                         <Input label="E-mail" type="email" input={email}
                             alterarInput={(e) => setEmail(e.target.value)}
                             placeholder="Ex: usuario@gmail.com" />
+
                         <Input label="NIF" type="text" input={nif}
                             alterarInput={(e) => setNif(e.target.value)}
                             placeholder="Ex: 123456789" />
+
                         <Input label="Senha" type="password" input={senha}
                             alterarInput={(e) => setSenha(e.target.value)}
                             placeholder="Ex: Senha@123" />
+
                         <Input label="Confirmar Senha" type="password" input={confirmarSenha}
                             alterarInput={(e) => setConfirmarSenha(e.target.value)}
                             placeholder="Ex: Senha@123" />
+
                         <InputArquivo label="Foto de perfil"
                             alterarInput={(e) => setFoto(e.target.files[0])} />
+
                     </div>
 
                     <div className={css.areaBotao}>

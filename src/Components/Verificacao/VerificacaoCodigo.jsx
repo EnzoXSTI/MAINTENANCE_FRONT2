@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import css from './VerificacaoCodigo.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
-import Footer from "../../Components/Footer/Footer.jsx";
-import Header from "../../Components/Header/Header.jsx";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function VerificacaoCodigo() {
@@ -40,8 +38,8 @@ export default function VerificacaoCodigo() {
 
         try {
             const rota = fluxo === 'cadastro'
-                ? 'http://10.92.3.149:5000/confirmar_email'
-                : 'http://10.92.3.149:5000/verificar_codigo';
+                ? 'http://localhost:5000/confirmar_email'
+                : 'http://localhost:5000/verificar_codigo';
 
             const resposta = await fetch(rota, { method: 'POST', body: formData });
             const dados = await resposta.json();
@@ -54,7 +52,10 @@ export default function VerificacaoCodigo() {
                 setTimeout(() => {
                     if (fluxo === 'cadastro') {
                         localStorage.removeItem('email_recuperacao');
-                        navigate(origem === 'adm' ? '/DashboardADM' : '/');
+                        if (origem === 'adm') navigate('/DashboardADM');
+                        else if (origem === 'professor') navigate('/DashboardProfessor');
+                        else if (origem === 'tecnico') navigate('/DashboardTec');
+                        else navigate('/');
                     } else {
                         navigate('/redefinir-senha');
                     }

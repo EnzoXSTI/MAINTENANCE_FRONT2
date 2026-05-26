@@ -31,7 +31,7 @@ export default function EditarPerfil() {
 
         async function carregarUsuario() {
             try {
-                const resposta = await fetch(`http://10.92.3.149:5000/buscar_usuarios/${idUsuario}`, {
+                const resposta = await fetch(`http://localhost:5000/buscar_usuarios/${idUsuario}`, {
                     credentials: 'include',
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
@@ -72,7 +72,7 @@ export default function EditarPerfil() {
         }
 
         try {
-            const resposta = await fetch(`http://10.92.3.149:5000/editar_usuarios/${idUsuario}`, {
+            const resposta = await fetch(`http://localhost:5000/editar_usuarios/${idUsuario}`, {
                 method: 'PUT',
                 body: formData,
                 credentials: 'include',
@@ -85,7 +85,7 @@ export default function EditarPerfil() {
                 setConfirmarSenha('');
                 if (dados.email_mudou) {
                     localStorage.setItem('email_recuperacao', email);
-                    setTimeout(() => navigate('/verificacao?fluxo=cadastro&origem=adm'), 1500);
+                    setTimeout(() => navigate(editandoOutro ? '/verificacao?fluxo=cadastro&origem=adm' : '/verificacao?fluxo=cadastro&origem=professor'), 1500);
                 } else {
                     setTimeout(() => navigate(editandoOutro ? '/DashboardADM' : '/DashboardProfessor'), 2000);
                 }

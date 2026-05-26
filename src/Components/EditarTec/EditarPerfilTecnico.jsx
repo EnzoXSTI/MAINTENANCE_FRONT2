@@ -5,7 +5,7 @@ import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 
-const BASE_URL = 'http://10.92.3.149:5000';
+const BASE_URL = 'http://localhost:5000';
 
 export default function EditarPerfilTecnico() {
     const [nome, setNome] = useState('');
@@ -36,7 +36,6 @@ export default function EditarPerfilTecnico() {
                 });
                 const d = await r.json();
                 if (r.ok) {
-                    setEmailOriginal(d.usuario.email);
                     setEmailOriginal(d.usuario.email);
                     setNome(d.usuario.nome);
                     setEmail(d.usuario.email);
@@ -91,7 +90,7 @@ export default function EditarPerfilTecnico() {
                 setConfirmarSenha('');
                 if (d.email_mudou) {
                     localStorage.setItem('email_recuperacao', email);
-                    setTimeout(() => navigate('/verificacao?fluxo=cadastro&origem=adm'), 1500);
+                    setTimeout(() => navigate(editandoOutro ? '/verificacao?fluxo=cadastro&origem=adm' : '/verificacao?fluxo=cadastro&origem=tecnico'), 1500);
                 } else {
                     setTimeout(() => navigate(editandoOutro ? '/DashboardADM' : '/DashboardTec'), 2000);
                 }

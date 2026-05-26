@@ -2,14 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import css from './DashboardAdm.module.css';
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = 'http://10.92.3.149:5000';
+const BASE_URL = 'http://localhost:5000';
 
-// Configuração de cada seção — só dados, zero JSX repetido
 const SECOES = [
     {
         titulo: 'Professores Cadastrados',
         btnLabel: 'Cadastrar Professor',
-        btnRota: '/cadastro',
+        btnRota: '/cadastrarPro',
         tipo: 1,
         rotaEditar: '/editarPro',
         labelEditar: 'Editar Professor',

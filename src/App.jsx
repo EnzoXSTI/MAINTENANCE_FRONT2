@@ -21,7 +21,6 @@ export default function App() {
 
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/cadastro" element={<Cadastrar />} />
                 <Route path="/verificacao" element={<Verificar />} />
                 <Route path="/enviarcodigo" element={<EnviarCode />} />
                 <Route path="/redefinir-senha" element={<Redefinir />} />
@@ -29,6 +28,7 @@ export default function App() {
                 {/* Professor */}
                 <Route path="/DashboardProfessor" element={<DashboardP />} />
                 <Route path="/editarPro/:id" element={<EditarProf />} />
+                <Route path="/cadastrarPro" element={<Cadastrar />} />
 
                 {/* Técnico */}
                 <Route path="/DashboardTec" element={<DashboardTecnico />} />
