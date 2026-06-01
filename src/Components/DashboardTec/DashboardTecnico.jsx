@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import css from './DashboardTecnico.module.css';
 import { useNavigate } from "react-router-dom";
+import ListaChamados from "../ListaChamados/ListaChamados.jsx";
+import CadastroChamado from "../CadastroChamado/CadastroChamado.jsx";
 
 export default function DashboardTecnico() {
     const [usuario, setUsuario] = useState(null);
@@ -73,6 +75,9 @@ export default function DashboardTecnico() {
                         </button>
                     </div>
                 </div>
+
+                <ListaChamados />
+                <CadastroChamado />
 
             </main>
         </div>

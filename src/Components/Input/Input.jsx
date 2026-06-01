@@ -7,8 +7,9 @@ export default function Input({
                                   alterarInput,
                                   placeholder,
                                   required = false,
-                                  aceita = "ambos", // Pode ser: "ambos", "numeros" ou "letras"
-                                  limite = null     // Limite máximo de caracteres
+                                  aceita = "ambos",
+                                  limite = null,
+                                  gordo = false
                               }) {
 
     function handleChange(e) {
@@ -35,7 +36,7 @@ export default function Input({
         <div className={css.inputGroup}>
             <label className={css.label}>{label}</label>
             <input
-                className={css.input}
+                className={`${css.input} ${gordo ? css.gordo : ''}`}
                 type={type}
                 value={input}
                 onChange={handleChange}

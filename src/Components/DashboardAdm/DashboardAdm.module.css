@@ -10,11 +10,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.8rem 2rem;
+    padding: 0.6rem 1.5rem;
     border-bottom: 1px solid #e8e8e8;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.logoImg { height: 3rem; width: auto; }
+.logoImg {
+    height: 45px;
+    width: auto;
+}
 
 .avatarHeader {
     width: 42px;
@@ -22,6 +29,7 @@
     border-radius: 50%;
     object-fit: cover;
     background-color: #ccc;
+    border: 2px solid #e0e0e0;
 }
 
 /* Main */

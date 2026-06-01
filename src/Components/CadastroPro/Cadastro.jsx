@@ -3,7 +3,7 @@ import css from './Cadastro.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import {Link, useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Cadastro() {
     const [nome, setNome] = useState('');

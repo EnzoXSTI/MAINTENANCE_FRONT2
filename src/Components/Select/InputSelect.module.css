@@ -11,7 +11,7 @@
     color: #111;
 }
 
-.input {
+.select {
     width: 100%;
     padding: 12px 16px;
     border: 1.5px solid #a3a3a3;
@@ -22,19 +22,14 @@
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    cursor: pointer;
+    font-family: inherit;
 }
 
-.input::placeholder {
-    color: #000;
-}
-
-.input:focus {
+.select:focus {
     border-color: #5aabdd;
-}
-
-.gordo {
-    min-height: 100px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    align-items: flex-start;
 }

@@ -19,7 +19,7 @@ export default function CadastrarAdm() {
     const token = localStorage.getItem('token');
     const tipoUsuario = parseInt(localStorage.getItem('tipo_usuario'));
 
-    // Apenas ADM (tipo === 0) pode acessar esta página
+
     useEffect(() => {
         if (tipoUsuario !== 0) {
             navigate('/');

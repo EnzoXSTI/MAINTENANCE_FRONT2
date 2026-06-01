@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import css from './DashboardAdm.module.css';
 import { useNavigate } from "react-router-dom";
+import ListaChamados from "../ListaChamado/ListaChamados.jsx";
+import CadastroChamado from "../CadastroChamado/CadastroChamado.jsx";
 
 const BASE_URL = 'http://localhost:5000';
 
@@ -114,6 +116,7 @@ export default function DashboardAdm() {
 
     return (
         <div className={css.pagina}>
+
             <main className={css.secao}>
                 {erro     && <p className={css.erro}>{erro}</p>}
                 {mensagem && <p className={css.sucesso}>{mensagem}</p>}
@@ -131,6 +134,10 @@ export default function DashboardAdm() {
                         </button>
                     </div>
                 </div>
+
+                <ListaChamados />
+
+                <CadastroChamado onCadastroConcluido={() => {}} />
 
                 {SECOES.map((s, i) => {
                     const lista = usuarios.filter(u => u.tipo === s.tipo);
