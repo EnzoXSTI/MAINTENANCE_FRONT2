@@ -38,8 +38,9 @@ export default function DashboardAdm() {
     const [adm, setAdm] = useState(null);
     const [erro, setErro] = useState('');
     const [mensagem, setMensagem] = useState('');
+    // Incrementado toda vez que um chamado é cadastrado, forçando o ListaChamados a recarregar
+    const [recarregarChamados, setRecarregarChamados] = useState(0);
 
-    // Um ref por seção, criados em ordem fixa
     const refs = [useRef(null), useRef(null), useRef(null)];
 
     const navigate = useNavigate();
@@ -135,9 +136,11 @@ export default function DashboardAdm() {
                     </div>
                 </div>
 
-                <ListaChamados />
+                {/* Lista recarrega automaticamente quando recarregarChamados muda */}
+                <ListaChamados recarregar={recarregarChamados} />
 
-                <CadastroChamado onCadastroConcluido={() => {}} />
+                {/* Ao concluir cadastro, incrementa o contador para forçar recarga da lista */}
+                <CadastroChamado onCadastroConcluido={() => setRecarregarChamados(n => n + 1)} />
 
                 {SECOES.map((s, i) => {
                     const lista = usuarios.filter(u => u.tipo === s.tipo);
@@ -167,7 +170,6 @@ export default function DashboardAdm() {
                                                     />
                                                 </div>
                                                 <p className={css.cardNome}>{u.nome}</p>
-                                                {/* ✅ Passa o ID do usuário selecionado na rota */}
                                                 <button
                                                     className={css.btnEditar}
                                                     onClick={() => navigate(`${s.rotaEditar}/${u.id}`)}

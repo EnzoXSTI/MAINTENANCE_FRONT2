@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import css from './DashboardProfessor.module.css';
 import { useNavigate } from "react-router-dom";
-import ListaChamados from "../ListaChamados/ListaChamados.jsx";
+import ListaChamados from "../ListaChamado/ListaChamados.jsx";
 import CadastroChamado from "../CadastroChamado/CadastroChamado.jsx";
 
 export default function DashboardProfessor() {

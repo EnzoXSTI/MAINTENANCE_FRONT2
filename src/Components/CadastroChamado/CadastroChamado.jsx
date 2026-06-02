@@ -5,17 +5,19 @@ import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
 import InputSelect from "../../Components/Select/InputSelect.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 
+const API_URL = 'http://localhost:5000';
 const SITUACOES = ['Aguardando', 'Em andamento', 'Finalizado'];
 
 export default function CadastroChamado({ onCadastroConcluido }) {
-    const [sala, setSala] = useState('');
+    const [sala,       setSala]       = useState('');
     const [patrimonio, setPatrimonio] = useState('');
-    const [titulo, setTitulo] = useState('');
-    const [descricao, setDescricao] = useState('');
-    const [situacao, setSituacao] = useState('');
-    const [foto, setFoto] = useState(null);
-    const [erro, setErro] = useState('');
-    const [mensagem, setMensagem] = useState('');
+    const [titulo,     setTitulo]     = useState('');
+    const [descricao,  setDescricao]  = useState('');
+    const [situacao,   setSituacao]   = useState('');
+    const [foto,       setFoto]       = useState(null);
+    const [erro,       setErro]       = useState('');
+    const [mensagem,   setMensagem]   = useState('');
+    const [carregando, setCarregando] = useState(false);
 
     useEffect(() => {
         if (!erro && !mensagem) return;
@@ -23,7 +25,7 @@ export default function CadastroChamado({ onCadastroConcluido }) {
         return () => clearTimeout(t);
     }, [erro, mensagem]);
 
-    function cadastrar() {
+    async function cadastrar() {
         setErro('');
         setMensagem('');
 
@@ -32,18 +34,45 @@ export default function CadastroChamado({ onCadastroConcluido }) {
             return;
         }
 
-        // Aqui futuramente vai a chamada da API
-        console.log({ sala, patrimonio, titulo, descricao, situacao, foto });
+        setCarregando(true);
 
-        setMensagem('Chamado cadastrado com sucesso!');
-        setSala('');
-        setPatrimonio('');
-        setTitulo('');
-        setDescricao('');
-        setSituacao('');
-        setFoto(null);
+        try {
+            const formData = new FormData();
+            formData.append('sala',       sala.trim());
+            formData.append('patrimonio', patrimonio.trim());
+            formData.append('titulo',     titulo.trim());
+            formData.append('descricao',  descricao.trim());
+            formData.append('situacao',   situacao);
+            if (foto) formData.append('foto', foto);
 
-        if (onCadastroConcluido) onCadastroConcluido();
+            const resp = await fetch(`${API_URL}/criar_chamado`, {
+                method: 'POST',
+                credentials: 'include',  // envia o cookie acess_token
+                body: formData,
+            });
+
+            const data = await resp.json();
+
+            if (!resp.ok) {
+                setErro(data.error || 'Erro ao cadastrar chamado.');
+                return;
+            }
+
+            setMensagem('Chamado cadastrado com sucesso!');
+            setSala('');
+            setPatrimonio('');
+            setTitulo('');
+            setDescricao('');
+            setSituacao('');
+            setFoto(null);
+
+            if (onCadastroConcluido) onCadastroConcluido();
+
+        } catch (e) {
+            setErro('Erro de conexão com o servidor.');
+        } finally {
+            setCarregando(false);
+        }
     }
 
     return (
@@ -55,7 +84,7 @@ export default function CadastroChamado({ onCadastroConcluido }) {
             {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
             <div className={css.campos}>
-                <Input label="Sala" type="text" input={sala}
+                <Input label="Sala *" type="text" input={sala}
                     alterarInput={e => setSala(e.target.value)}
                     placeholder="Ex: 101" />
 
@@ -63,17 +92,17 @@ export default function CadastroChamado({ onCadastroConcluido }) {
                     alterarInput={e => setPatrimonio(e.target.value)}
                     placeholder="Ex: 1" />
 
-                <Input label="Título" type="text" input={titulo}
+                <Input label="Título *" type="text" input={titulo}
                     alterarInput={e => setTitulo(e.target.value)}
                     placeholder="Ex: infiltração" />
 
-                <Input label="Descrição" type="text" input={descricao}
+                <Input label="Descrição *" type="text" input={descricao}
                     alterarInput={e => setDescricao(e.target.value)}
                     placeholder="Me especifique o ocorrido"
                     gordo />
 
                 <InputSelect
-                    label="Situação"
+                    label="Situação *"
                     valor={situacao}
                     alterarValor={e => setSituacao(e.target.value)}
                     opcoes={SITUACOES}
@@ -83,7 +112,12 @@ export default function CadastroChamado({ onCadastroConcluido }) {
                     alterarInput={e => setFoto(e.target.files[0])} />
             </div>
 
-            <Botao cor="Azul" texto="Cadastrar" acao={cadastrar} />
+            <Botao
+                cor="Azul"
+                texto={carregando ? 'Cadastrando...' : 'Cadastrar'}
+                acao={cadastrar}
+                disabled={carregando}
+            />
         </div>
     );
 }

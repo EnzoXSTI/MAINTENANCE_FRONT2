@@ -1,0 +1,127 @@
+.pagina {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+/* Topo */
+.topo {
+    display: flex;
+    gap: 0.8rem;
+    padding: 1.2rem 2rem;
+}
+
+.btnVoltar,
+.btnEditar,
+.btnSalvar {
+    padding: 0.45rem 1.4rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    background-color: #5aabdd;
+    color: #fff;
+}
+.btnVoltar:hover,
+.btnEditar:hover,
+.btnSalvar:hover { opacity: 0.85; }
+
+/* Conteúdo */
+.conteudo {
+    flex: 1;
+    padding: 0 2rem 2rem;
+    max-width: 860px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.erro {
+    background-color: #d10000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.sucesso {
+    background: #008a2e;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.titulo {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #5aabdd;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Grid duas colunas */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2.5rem;
+    align-items: start;
+}
+
+/* Campo */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 0.8rem;
+}
+
+.label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.valor {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #a3a3a3;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.valorGrande {
+    min-height: 100px;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Foto */
+.fotoWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.foto {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1.5px solid #e0e0e0;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    .topo { padding: 1rem; }
+    .conteudo { padding: 0 1rem 2rem; }
+}

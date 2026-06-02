@@ -58,10 +58,19 @@
     font-size: 0.9rem;
 }
 
-.naoFinalizado {
-    color: #aaa;
-    font-style: italic;
+/* Badges de situação */
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 700;
 }
+
+.badge_Aguardando     { background: #fff3cd; color: #856404; }
+.badge_Em_andamento   { background: #cce5ff; color: #004085; }
+.badge_Urgente        { background: #f8d7da; color: #721c24; }
+.badge_Finalizado     { background: #d4edda; color: #155724; }
 
 .btnAnalisar {
     padding: 0.35rem 1.1rem;
