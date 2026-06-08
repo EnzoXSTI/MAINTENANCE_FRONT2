@@ -1,0 +1,76 @@
+.pagina {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.secao {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-image: url('/fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.conteudo {
+    width: 100%;
+    max-width: 420px;
+    padding: 0 1rem;
+}
+
+.erro {
+    background-color: #d10000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.sucesso {
+    background: #008a2e;
+    color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.3rem;
+}
+
+.logoImg {
+    height: 7rem;
+    width: auto;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #5aabdd;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+@media (max-width: 480px) {
+    .secao    { background-image: none; }
+    .conteudo { padding: 0 0.5rem; }
+}

@@ -15,6 +15,7 @@ import EditarPerfilTecnico from "./Components/EditarTec/EditarPerfilTecnico.jsx"
 import DashboardTecnico from "./Components/DashboardTec/DashboardTecnico.jsx";
 import CadastrarAdm from "./Components/CadastrarAdm/CadastrarAdm.jsx";
 import AnalisarChamado from "./Components/AnalisarChamado/AnalisarChamado.jsx";
+import EditarChamado from "./Components/EditarChamado/EditarChamado.jsx";
 
 export default function App() {
     return (
@@ -36,6 +37,7 @@ export default function App() {
                 <Route path="/cadastrarAdm" element={<CadastrarAdm />} />
                 <Route path="/EditarAdm/:id" element={<EditarPerfilAdm />} />
                 <Route path="/analisar-chamado/:id" element={<AnalisarChamado />} />
+                <Route path="/editar-chamado/:id" element={<EditarChamado/>} />
             </Routes>
 
             <Footer />

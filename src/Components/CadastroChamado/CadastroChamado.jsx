@@ -6,7 +6,7 @@ import InputSelect from "../../Components/Select/InputSelect.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 
 const API_URL = 'http://localhost:5000';
-const SITUACOES = ['Aguardando', 'Em andamento', 'Finalizado'];
+const SITUACOES = ['Aguardando', 'Em andamento'];
 
 export default function CadastroChamado({ onCadastroConcluido }) {
     const [sala,       setSala]       = useState('');

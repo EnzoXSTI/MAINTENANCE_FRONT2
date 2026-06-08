@@ -5,7 +5,6 @@
     background-color: #fff;
 }
 
-/* Topo */
 .topo {
     display: flex;
     gap: 0.8rem;
@@ -29,13 +28,18 @@
 .btnEditar:hover,
 .btnSalvar:hover { opacity: 0.85; }
 
-/* Conteúdo */
 .conteudo {
     flex: 1;
     padding: 0 2rem 2rem;
     max-width: 860px;
     width: 100%;
     margin: 0 auto;
+}
+
+.carregando {
+    text-align: center;
+    margin-top: 4rem;
+    color: #5aabdd;
 }
 
 .erro {
@@ -64,7 +68,6 @@
     margin-bottom: 2rem;
 }
 
-/* Grid duas colunas */
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -72,7 +75,6 @@
     align-items: start;
 }
 
-/* Campo */
 .campo {
     display: flex;
     flex-direction: column;
@@ -93,7 +95,7 @@
     border-radius: 10px;
     font-size: 0.95rem;
     color: #333;
-    background-color: #ffffff;
+    background-color: #fff;
     box-sizing: border-box;
     text-align: center;
 }
@@ -103,6 +105,76 @@
     text-align: left;
     display: flex;
     align-items: flex-start;
+}
+
+/* Técnicos */
+.tecnicoLista {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 0.6rem;
+}
+
+.tecnicoItem {
+    padding: 10px 16px;
+    border: 1.5px solid #a3a3a3;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #fff;
+    text-align: center;
+}
+
+/* Atribuição ADM */
+.atribuicao {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+}
+
+.atribuicaoLabel {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0;
+}
+
+.checkItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.checkItem input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    accent-color: #5aabdd;
+    cursor: pointer;
+}
+
+.btnAtribuir {
+    margin-top: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: #5aabdd;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.btnAtribuir:hover    { opacity: 0.85; }
+.btnAtribuir:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.atribuido {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #008a2e;
+    margin-top: 0.4rem;
 }
 
 /* Foto */
@@ -119,9 +191,8 @@
     border: 1.5px solid #e0e0e0;
 }
 
-/* Responsivo */
 @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-    .topo { padding: 1rem; }
-    .conteudo { padding: 0 1rem 2rem; }
+    .grid    { grid-template-columns: 1fr; }
+    .topo    { padding: 1rem; }
+    .conteudo{ padding: 0 1rem 2rem; }
 }
