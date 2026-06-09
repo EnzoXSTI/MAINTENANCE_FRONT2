@@ -36,12 +36,6 @@
     margin: 0 auto;
 }
 
-.carregando {
-    text-align: center;
-    margin-top: 4rem;
-    color: #5aabdd;
-}
-
 .erro {
     background-color: #d10000;
     color: #fff;
@@ -88,41 +82,44 @@
     color: #111;
 }
 
+/* Campos sem borda */
 .valor {
     width: 100%;
-    padding: 12px 16px;
-    border: 1.5px solid #a3a3a3;
-    border-radius: 10px;
+    padding: 4px 0;
     font-size: 0.95rem;
-    color: #333;
-    background-color: #fff;
+    color: #444;
     box-sizing: border-box;
-    text-align: center;
 }
 
 .valorGrande {
-    min-height: 100px;
-    text-align: left;
-    display: flex;
-    align-items: flex-start;
+    min-height: 60px;
 }
+
+/* Badge de situação */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.badge_Finalizado   { background: #d4edda; color: #155724; }
+.badge_Em_andamento { background: #fff3cd; color: #856404; }
+.badge_Aguardando   { background: #fff3cd; color: #856404; }
+.badge_Urgente      { background: #f8d7da; color: #721c24; }
 
 /* Técnicos */
 .tecnicoLista {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     margin-bottom: 0.6rem;
 }
 
 .tecnicoItem {
-    padding: 10px 16px;
-    border: 1.5px solid #a3a3a3;
-    border-radius: 10px;
     font-size: 0.95rem;
-    color: #333;
-    background-color: #fff;
-    text-align: center;
+    color: #444;
+    padding: 2px 0;
 }
 
 /* Atribuição ADM */
@@ -167,8 +164,7 @@
     cursor: pointer;
     transition: opacity 0.2s;
 }
-.btnAtribuir:hover    { opacity: 0.85; }
-.btnAtribuir:disabled { opacity: 0.5; cursor: not-allowed; }
+.btnAtribuir:hover { opacity: 0.85; }
 
 .atribuido {
     font-size: 0.88rem;
@@ -188,11 +184,10 @@
     max-width: 200px;
     border-radius: 10px;
     object-fit: cover;
-    border: 1.5px solid #e0e0e0;
 }
 
 @media (max-width: 600px) {
-    .grid    { grid-template-columns: 1fr; }
-    .topo    { padding: 1rem; }
-    .conteudo{ padding: 0 1rem 2rem; }
+    .grid     { grid-template-columns: 1fr; }
+    .topo     { padding: 1rem; }
+    .conteudo { padding: 0 1rem 2rem; }
 }
