@@ -48,7 +48,7 @@ export default function EditarChamado() {
             });
             const data = await resp.json();
             if (!resp.ok) { setErro(data.error || 'Erro ao salvar.'); return; }
-            setMensagem('Chamado atualizado com sucesso!');
+            setMensagem('Chamado updated com sucesso!');
             setTimeout(() => navigate(-1), 2000);
         } catch {
             setErro('Erro de conexão com o servidor.');
@@ -72,7 +72,19 @@ export default function EditarChamado() {
                         <Input label="Sala" type="text" input={campos.sala} alterarInput={alterar('sala')} placeholder="Ex: 101" />
                         <Input label="Patrimônio" type="text" input={campos.patrimonio} alterarInput={alterar('patrimonio')} placeholder="Ex: 1" />
                         <Input label="Título" type="text" input={campos.titulo} alterarInput={alterar('titulo')} placeholder="Ex: infiltração" />
-                        <Input label="Descrição" type="text" input={campos.descricao} alterarInput={alterar('descricao')} placeholder="Descreva o ocorrido" gordo />
+
+                        {/* Substituição do Input de Descrição pelo Textarea */}
+                        <div className={css.campoDescricao}>
+                            <label className={css.label}>Descrição</label>
+                            <textarea
+                                className={css.textarea}
+                                value={campos.descricao}
+                                onChange={alterar('descricao')}
+                                placeholder="Descreva o ocorrido"
+                                rows="4"
+                            />
+                        </div>
+
                         <InputSelect label="Situação" valor={campos.situacao} alterarValor={alterar('situacao')} opcoes={SITUACOES} />
                     </div>
 

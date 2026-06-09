@@ -63,7 +63,19 @@ export default function CadastroChamado({ onCadastroConcluido }) {
                 <Input label="Sala" type="text" input={campos.sala} alterarInput={alterar('sala')} placeholder="Ex: 101" />
                 <Input label="Patrimônio" type="text" input={campos.patrimonio} alterarInput={alterar('patrimonio')} placeholder="Ex: 1" />
                 <Input label="Título" type="text" input={campos.titulo} alterarInput={alterar('titulo')} placeholder="Ex: infiltração" />
-                <Input label="Descrição" type="text" input={campos.descricao} alterarInput={alterar('descricao')} placeholder="Me especifique o ocorrido" gordo />
+
+                {/* Substituição do Input antigo pelo Textarea */}
+                <div className={css.campoDescricao}>
+                    <label className={css.label}>Descrição</label>
+                    <textarea
+                        className={css.textarea}
+                        value={campos.descricao}
+                        onChange={alterar('descricao')}
+                        placeholder="Me especifique o ocorrido"
+                        rows="4"
+                    />
+                </div>
+
                 <InputSelect label="Situação" valor={campos.situacao} alterarValor={alterar('situacao')} opcoes={SITUACOES} />
                 <InputArquivo label="Foto do Acontecido" alterarInput={e => setFoto(e.target.files[0])} />
             </div>

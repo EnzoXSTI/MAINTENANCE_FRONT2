@@ -67,12 +67,13 @@
 
 .textarea {
     width: 100%;
+    min-height: 100px;
     padding: 0.6rem 0.8rem;
     border: 1px solid #dde3ea;
     border-radius: 8px;
     font-size: 0.9rem;
     color: #333;
-    resize: vertical;
+    resize: vertical; /* Permite esticar apenas para baixo */
     font-family: inherit;
     background: #fafbfc;
     box-sizing: border-box;

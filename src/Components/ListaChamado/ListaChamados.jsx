@@ -7,6 +7,7 @@ const API_URL = 'http://localhost:5000';
 export default function ListaChamados({ recarregar = 0 }) {
     const [chamados, setChamados] = useState([]);
     const [erro, setErro] = useState('');
+    const [deletando, setDeletando] = useState(null);
     const navigate = useNavigate();
 
     const buscarChamados = useCallback(async () => {
@@ -20,6 +21,25 @@ export default function ListaChamados({ recarregar = 0 }) {
         }
     }, []);
 
+    const deletarChamado = useCallback(async (id_chamado) => {
+        // Sem a mensagem de confirmação (vai direto)
+        setDeletando(id_chamado);
+        setErro('');
+        try {
+            const resp = await fetch(`${API_URL}/deletar_chamado/${id_chamado}`, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+            const data = await resp.json();
+            if (!resp.ok) { setErro(data.error || 'Erro ao deletar chamado.'); return; }
+            setChamados(prev => prev.filter(c => c.id_chamado !== id_chamado));
+        } catch {
+            setErro('Erro de conexão com o servidor.');
+        } finally {
+            setDeletando(null);
+        }
+    }, []);
+
     useEffect(() => { buscarChamados(); }, [buscarChamados, recarregar]);
 
     return (
@@ -30,29 +50,40 @@ export default function ListaChamados({ recarregar = 0 }) {
             <div className={css.tabelaWrapper}>
                 <table className={css.tabela}>
                     <thead>
-                        <tr>
-                            {['Sala', 'Data de Criação', 'Data de Finalização', 'Ações'].map(h => (
-                                <th key={h}>{h}</th>
-                            ))}
-                        </tr>
+                    <tr>
+                        <th>Sala</th>
+                        <th>Data de Criação</th>
+                        <th>Data de Finalização</th>
+                        <th className={css.thAcoes}>Ações</th> {/* Classe nova aqui */}
+                    </tr>
                     </thead>
                     <tbody>
-                        {chamados.length === 0 ? (
-                            <tr><td colSpan={4} className={css.vazio}>Nenhum chamado encontrado.</td></tr>
-                        ) : (
-                            chamados.map(c => (
-                                <tr key={c.id_chamado}>
-                                    <td>{c.sala}</td>
-                                    <td>{c.data_abertura ?? '—'}</td>
-                                    <td>{c.data_finalizacao ?? ''}</td>
-                                    <td>
-                                        <button className={css.btnAnalisar} onClick={() => navigate(`/analisar-chamado/${c.id_chamado}`)}>
-                                            Analisar
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))
-                        )}
+                    {chamados.length === 0 ? (
+                        <tr><td colSpan={4} className={css.vazio}>Nenhum chamado encontrado.</td></tr>
+                    ) : (
+                        chamados.map(c => (
+                            <tr key={c.id_chamado}>
+                                <td>{c.sala}</td>
+                                <td>{c.data_abertura ?? '—'}</td>
+                                <td>{c.data_finalizacao ?? ''}</td>
+                                <td className={css.acoes}>
+                                    <button
+                                        className={css.btnAnalisar}
+                                        onClick={() => navigate(`/analisar-chamado/${c.id_chamado}`)}
+                                    >
+                                        Analisar
+                                    </button>
+                                    <button
+                                        className={css.btnDeletar}
+                                        onClick={() => deletarChamado(c.id_chamado)}
+                                        disabled={deletando === c.id_chamado}
+                                    >
+                                        Deletar {/* Texto fixo sem os "..." */}
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    )}
                     </tbody>
                 </table>
             </div>

@@ -23,8 +23,8 @@ export default function AnalisarChamado() {
     const [editando, setEditando] = useState(false);
     const [mensagem, setMensagem] = useState('');
     const [erro, setErro] = useState('');
-    const [meuTipo, setMeuTipo] = useState(null);
-    const [meuId, setMeuId] = useState(null);
+    const meuTipo = Number(localStorage.getItem('tipo_usuario'));
+    const meuId   = Number(localStorage.getItem('id_usuario'));
     const [todosTecnicos, setTodosTecnicos] = useState([]);
     const [selecionados, setSelecionados] = useState([]);
 
@@ -38,15 +38,10 @@ export default function AnalisarChamado() {
         if (!id) return;
         async function carregar() {
             try {
-                const [{ chamado }, me] = await Promise.all([
-                    apiFetch(`/buscar_chamado/${id}`),
-                    apiFetch('/me'),
-                ]);
+                const { chamado } = await apiFetch(`/buscar_chamado/${id}`);
                 setChamado(chamado);
-                setMeuTipo(me.tipo);
-                setMeuId(me.id_usuario);
                 setSelecionados(chamado.tecnicos.map(t => t.id));
-                if (me.tipo === 0) {
+                if (meuTipo === 0) {
                     const { tecnicos } = await apiFetch('/listar_tecnicos');
                     setTodosTecnicos(tecnicos);
                 }
