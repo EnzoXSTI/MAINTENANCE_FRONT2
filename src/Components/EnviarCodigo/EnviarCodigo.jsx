@@ -20,7 +20,6 @@ export default function EnviarCodigo() {
     async function solicitarCodigo(e) {
         if (e) e.preventDefault();
         setErro('');
-        setMensagem('Enviando e-mail...');
 
         const formData = new FormData();
         formData.append('email', email);

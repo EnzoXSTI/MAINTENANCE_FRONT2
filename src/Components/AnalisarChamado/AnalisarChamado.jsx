@@ -168,7 +168,7 @@ export default function AnalisarChamado() {
                                     <button className={css.btnAtribuir} onClick={() => atribuirTecnicos(selecionados)}>Salvar Técnicos</button>
                                 </div>
                             )}
-                            {meuTipo === 2 && !jaFinalizado && !jaAtribuido && (
+                            {meuTipo === 2 && !jaFinalizado && !jaAtribuido && chamado.tecnicos?.length === 0 &&  (
                                 <button className={css.btnAtribuir} onClick={() => atribuirTecnicos([])}>Pegar este chamado</button>
                             )}
                             {meuTipo === 2 && jaAtribuido && (
@@ -199,7 +199,7 @@ export default function AnalisarChamado() {
                             </div>
                         </div>
 
-                        {(meuTipo === 0 || meuTipo === 2) && (
+                        {(meuTipo === 0 || meuTipo === 2) && selecionados.includes(meuId) && (
                             <Botao cor="Azul" texto="Concluir" acao={concluir} disabled={jaFinalizado} />
                         )}
                     </div>

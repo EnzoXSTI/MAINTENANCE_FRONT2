@@ -60,7 +60,7 @@ export default function CadastroChamado({ onCadastroConcluido }) {
             {mensagem && <p className={css.sucesso}>{mensagem}</p>}
 
             <div className={css.campos}>
-                <Input label="Sala" type="text" input={campos.sala} alterarInput={alterar('sala')} placeholder="Ex: 101" />
+                <Input label="Sala" type="text" input={campos.sala} alterarInput={alterar('sala')} placeholder="Ex: 101"/>
                 <Input label="Patrimônio" type="text" input={campos.patrimonio} alterarInput={alterar('patrimonio')} placeholder="Ex: 1" />
                 <Input label="Título" type="text" input={campos.titulo} alterarInput={alterar('titulo')} placeholder="Ex: infiltração" />
 

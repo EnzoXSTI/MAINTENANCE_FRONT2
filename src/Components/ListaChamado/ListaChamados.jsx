@@ -16,6 +16,7 @@ export default function ListaChamados({ recarregar = 0 }) {
             const data = await resp.json();
             if (!resp.ok) { setErro(data.error || 'Erro ao carregar chamados.'); return; }
             setChamados(data.chamados);
+            console.log(data.chamados)
         } catch {
             setErro('Erro de conexão com o servidor.');
         }
@@ -73,13 +74,15 @@ export default function ListaChamados({ recarregar = 0 }) {
                                     >
                                         Analisar
                                     </button>
-                                    <button
-                                        className={css.btnDeletar}
-                                        onClick={() => deletarChamado(c.id_chamado)}
-                                        disabled={deletando === c.id_chamado}
-                                    >
-                                        Deletar {/* Texto fixo sem os "..." */}
-                                    </button>
+                                    {c.id_tecnico_atribuido && c.id_tecnico_atribuido.includes(Number(localStorage.getItem('id_usuario'))) && (
+                                        <button
+                                            className={css.btnDeletar}
+                                            onClick={() => deletarChamado(c.id_chamado)}
+                                            disabled={deletando === c.id_chamado}
+                                        >
+                                            Deletar {/* Texto fixo sem os "..." */}
+                                        </button>
+                                    )}
                                 </td>
                             </tr>
                         ))
