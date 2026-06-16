@@ -26,7 +26,8 @@ export default function EditarPerfilTecnico() {
     const editandoOutro = !!id; // true quando o ADM está editando outra pessoa
 
     useEffect(() => {
-        if (!idAlvo) { navigate('/'); return; }
+        const token = localStorage.getItem('token');
+        if (!token) { navigate('/'); return; }
 
         async function carregarUsuario() {
             try {

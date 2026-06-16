@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import css from './CadastroChamado.module.css';
 import Input from "../../Components/Input/Input.jsx";
 import InputArquivo from "../../Components/InputArquivo/InputArquivo.jsx";
-import InputSelect from "../../Components/Select/InputSelect.jsx";
 import Botao from "../../Components/Botao/Botao.jsx";
 
 const API_URL = 'http://localhost:5000';
-const SITUACOES = ['Aguardando', 'Em andamento'];
-const CAMPOS_INICIAIS = { sala: '', patrimonio: '', titulo: '', descricao: '', situacao: '' };
+const CAMPOS_INICIAIS = { sala: '', patrimonio: '', titulo: '', descricao: '', situacao: 'Aguardando' };
 
 export default function CadastroChamado({ onCadastroConcluido }) {
     const [campos, setCampos] = useState(CAMPOS_INICIAIS);
@@ -26,8 +24,8 @@ export default function CadastroChamado({ onCadastroConcluido }) {
     }
 
     async function cadastrar() {
-        const { sala, titulo, descricao, situacao } = campos;
-        if (!sala.trim() || !titulo.trim() || !descricao.trim() || !situacao) {
+        const { sala, titulo, descricao } = campos;
+        if (!sala.trim() || !titulo.trim() || !descricao.trim()) {
             setErro('Preencha todos os campos obrigatórios.');
             return;
         }
@@ -64,7 +62,6 @@ export default function CadastroChamado({ onCadastroConcluido }) {
                 <Input label="Patrimônio" type="text" input={campos.patrimonio} alterarInput={alterar('patrimonio')} placeholder="Ex: 1" />
                 <Input label="Título" type="text" input={campos.titulo} alterarInput={alterar('titulo')} placeholder="Ex: infiltração" />
 
-                {/* Substituição do Input antigo pelo Textarea */}
                 <div className={css.campoDescricao}>
                     <label className={css.label}>Descrição</label>
                     <textarea
@@ -76,7 +73,6 @@ export default function CadastroChamado({ onCadastroConcluido }) {
                     />
                 </div>
 
-                <InputSelect label="Situação" valor={campos.situacao} alterarValor={alterar('situacao')} opcoes={SITUACOES} />
                 <InputArquivo label="Foto do Acontecido" alterarInput={e => setFoto(e.target.files[0])} />
             </div>
 

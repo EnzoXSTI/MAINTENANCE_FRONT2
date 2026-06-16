@@ -17,11 +17,18 @@ export default function EditarChamado() {
     const [erro, setErro] = useState('');
     const [mensagem, setMensagem] = useState('');
 
+    const isAdm = parseInt(localStorage.getItem('tipo_usuario')) === 0;
+
     useEffect(() => {
         if (!erro && !mensagem) return;
         const t = setTimeout(() => { setErro(''); setMensagem(''); }, 8000);
         return () => clearTimeout(t);
     }, [erro, mensagem]);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) { navigate('/'); return; }
+    }, []);
 
     useEffect(() => {
         if (!id) return;
@@ -48,7 +55,7 @@ export default function EditarChamado() {
             });
             const data = await resp.json();
             if (!resp.ok) { setErro(data.error || 'Erro ao salvar.'); return; }
-            setMensagem('Chamado updated com sucesso!');
+            setMensagem('Chamado atualizado com sucesso!');
             setTimeout(() => navigate(-1), 2000);
         } catch {
             setErro('Erro de conexão com o servidor.');
@@ -73,7 +80,6 @@ export default function EditarChamado() {
                         <Input label="Patrimônio" type="text" input={campos.patrimonio} alterarInput={alterar('patrimonio')} placeholder="Ex: 1" />
                         <Input label="Título" type="text" input={campos.titulo} alterarInput={alterar('titulo')} placeholder="Ex: infiltração" />
 
-                        {/* Substituição do Input de Descrição pelo Textarea */}
                         <div className={css.campoDescricao}>
                             <label className={css.label}>Descrição</label>
                             <textarea
@@ -85,7 +91,10 @@ export default function EditarChamado() {
                             />
                         </div>
 
-                        <InputSelect label="Situação" valor={campos.situacao} alterarValor={alterar('situacao')} opcoes={SITUACOES} />
+                        {/* Só ADM pode alterar a situação */}
+                        {isAdm && (
+                            <InputSelect label="Situação" valor={campos.situacao} alterarValor={alterar('situacao')} opcoes={SITUACOES} />
+                        )}
                     </div>
 
                     <div className={css.botoes}>

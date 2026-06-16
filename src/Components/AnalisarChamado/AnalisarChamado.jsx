@@ -35,6 +35,14 @@ export default function AnalisarChamado() {
     }, [erro, mensagem]);
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/');
+            return;
+        }
+    }, []);
+
+    useEffect(() => {
         if (!id) return;
         async function carregar() {
             try {

@@ -12,13 +12,31 @@ export default function DashboardTecnico() {
     const idUsuario = localStorage.getItem('id_usuario');
     const token = localStorage.getItem('token');
 
-    // Redireciona se não estiver logado
+    // Verifica token no servidor antes de carregar
     useEffect(() => {
-        if (!idUsuario) {
-            navigate('/');
-            return;
+        async function verificarAcesso() {
+            const token = localStorage.getItem('token');
+            if (!idUsuario || !token) { navigate('/'); return; }
+
+            try {
+                const r = await fetch('http://localhost:5000/verificar_token', {
+                    credentials: 'include',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!r.ok) {
+                    localStorage.removeItem('id_usuario');
+                    localStorage.removeItem('token');
+                    navigate('/');
+                    return;
+                }
+            } catch {
+                navigate('/');
+                return;
+            }
+
+            carregarUsuario();
         }
-        carregarUsuario();
+        verificarAcesso();
     }, []);
 
     // Limpa o erro após 8 segundos

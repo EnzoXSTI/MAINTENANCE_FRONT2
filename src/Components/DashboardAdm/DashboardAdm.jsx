@@ -48,10 +48,33 @@ export default function DashboardAdm() {
     const idUsuario = localStorage.getItem('id_usuario');
 
     useEffect(() => {
-        const tipo = parseInt(localStorage.getItem('tipo_usuario'));
-        if (tipo !== 0) { navigate('/'); return; }
-        carregarAdm();
-        carregarUsuarios();
+        // Verifica token no servidor antes de carregar
+        async function verificarAcesso() {
+            const token = localStorage.getItem('token');
+            const tipo = parseInt(localStorage.getItem('tipo_usuario'));
+            if (!token || tipo !== 0) { navigate('/'); return; }
+
+            try {
+                const r = await fetch('http://localhost:5000/verificar_token', {
+                    credentials: 'include',
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                if (!r.ok) {
+                    localStorage.removeItem('id_usuario');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('tipo_usuario');
+                    navigate('/');
+                    return;
+                }
+            } catch {
+                navigate('/');
+                return;
+            }
+
+            carregarAdm();
+            carregarUsuarios();
+        }
+        verificarAcesso();
     }, []);
 
     useEffect(() => {

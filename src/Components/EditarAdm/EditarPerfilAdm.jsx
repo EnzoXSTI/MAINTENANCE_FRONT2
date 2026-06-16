@@ -21,9 +21,10 @@ export default function EditarPerfilAdm() {
     // Se tiver :id na rota (ADM editando outro), usa esse. Senão, usa o do localStorage (próprio perfil)
     const idAlvo = id || localStorage.getItem('id_usuario');
     const token = localStorage.getItem('token');
+    const editandoOutro = !!id;
 
     useEffect(() => {
-        if (!idAlvo) { navigate('/'); return; }
+        if (!token) { navigate('/'); return; }
 
         async function carregarUsuario() {
             try {

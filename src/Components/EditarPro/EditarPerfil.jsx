@@ -27,7 +27,8 @@ export default function EditarPerfil() {
     }, [erro, mensagem]);
 
     useEffect(() => {
-        if (!idUsuario) { navigate('/'); return; }
+        const token = localStorage.getItem('token');
+        if (!token) { navigate('/'); return; }
 
         async function carregarUsuario() {
             try {
