@@ -207,7 +207,10 @@ export default function AnalisarChamado() {
                             </div>
                         </div>
 
-                        {(meuTipo === 0 || meuTipo === 2) && selecionados.includes(meuId) && (
+                        {(meuTipo == 0 || meuTipo == 2) && selecionados.includes(meuId) && (
+                            <Botao cor="Azul" texto="Concluir" acao={concluir} disabled={jaFinalizado} />
+                        )}
+                        {meuTipo == 0 && (
                             <Botao cor="Azul" texto="Concluir" acao={concluir} disabled={jaFinalizado} />
                         )}
                     </div>

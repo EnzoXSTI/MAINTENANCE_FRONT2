@@ -83,6 +83,15 @@ export default function ListaChamados({ recarregar = 0 }) {
                                             Deletar {/* Texto fixo sem os "..." */}
                                         </button>
                                     )}
+                                    {localStorage.getItem('tipo_usuario') == 0 && (
+                                        <button
+                                            className={css.btnDeletar}
+                                            onClick={() => deletarChamado(c.id_chamado)}
+                                            disabled={deletando === c.id_chamado}
+                                        >
+                                            Deletar {/* Texto fixo sem os "..." */}
+                                        </button>
+                                    )}
                                 </td>
                             </tr>
                         ))
